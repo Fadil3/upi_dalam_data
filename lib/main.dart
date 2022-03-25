@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import "home.dart";
+import 'package:upi_dalam_data/contact.dart';
+import "package:upi_dalam_data/home.dart";
 
 void main() => runApp(const MyApp());
 
@@ -31,10 +32,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final List<Widget> _widgetOptions = <Widget>[
     // button click
     cardData(),
-    const Text(
-      'Index 1: Contact',
-      style: optionStyle,
-    ),
+    contactPage(),
     const Text(
       'Index 2: Setting',
       style: optionStyle,
