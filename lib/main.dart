@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upi_dalam_data/contact.dart';
 import "package:upi_dalam_data/home.dart";
+import 'package:upi_dalam_data/setting.dart';
 
 void main() => runApp(const MyApp());
 
@@ -33,10 +34,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     // button click
     cardData(),
     contactPage(),
-    const Text(
-      'Index 2: Setting',
-      style: optionStyle,
-    ),
+    settingPage(),
   ];
 
   void _onItemTapped(int index) {
