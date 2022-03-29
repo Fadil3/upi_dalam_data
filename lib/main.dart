@@ -32,6 +32,13 @@ class _LoginPageState extends State<LoginPage> {
 
   String _errorMessageUser = '';
   String _errorMessagePassword = '';
+  bool _obscureText = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   @override
   void dispose() {
@@ -67,9 +74,42 @@ class _LoginPageState extends State<LoginPage> {
                   labelText: 'NIM / NIP / NIDN',
                   errorText: _errorMessageUser == "" ? null : _errorMessageUser,
                   border: const OutlineInputBorder(),
-                  suffixIcon: _errorMessageUser != "" ? const Icon(
-                    Icons.error,
-                  ) : null,
+                  suffixIcon: _errorMessageUser != ""
+                      ? const Icon(
+                          Icons.error,
+                        )
+                      : null,
+                ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(5),
+            ),
+            SizedBox(
+              width: 300,
+              child: TextFormField(
+                controller: passwordController,
+                obscureText: _obscureText,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  errorText: _errorMessagePassword == ""
+                      ? null
+                      : _errorMessagePassword,
+                  border: const OutlineInputBorder(),
+                  suffixIcon: _errorMessagePassword != ""
+                      ? const Icon(
+                          Icons.error,
+                        )
+                      : InkWell(
+                    onTap: _toggle,
+                    child: Icon(
+                      _obscureText
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      size: 15.0,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -81,10 +121,11 @@ class _LoginPageState extends State<LoginPage> {
                     _errorMessageUser = 'User ID cannot be empty';
                   });
                   return;
-                } else {
+                } else if (passwordController.text.isEmpty) {
                   setState(() {
-                    _errorMessageUser = '';
+                    _errorMessagePassword = 'Password cannot be empty';
                   });
+                  return;
                 }
                 Navigator.push(
                   context,
