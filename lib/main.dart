@@ -113,6 +113,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
+            const Padding(
+              padding: EdgeInsets.all(10),
+            ),
             ElevatedButton(
               child: const Text('Login'),
               onPressed: () {
@@ -132,6 +135,12 @@ class _LoginPageState extends State<LoginPage> {
                   MaterialPageRoute(builder: (context) => const HomePage()),
                 );
               },
+            ),
+            const Spacer(),
+            const Text("a Leading and Outstanding University",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            const Padding(
+              padding: EdgeInsets.all(10),
             ),
           ],
         ),
