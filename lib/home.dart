@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // function to create the card
-Widget homePage() {
+Widget home() {
   return SingleChildScrollView(
       child: Column(
         // center

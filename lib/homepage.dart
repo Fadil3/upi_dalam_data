@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final List<Widget> _widgetOptions = <Widget>[
     // button click
-    homePage(),
+    home(),
     contactPage(),
     settingPage(),
   ];
