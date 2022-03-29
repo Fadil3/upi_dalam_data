@@ -30,9 +30,13 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('Silahkan Login'),
+            Image.asset("images/logo-upi.png",height: 200,width: 200,),
+            const Padding(
+              padding: EdgeInsets.all(20),
+            ),
+            const Text('Single Sign-on',
+                style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
             ElevatedButton(
               child: const Text('Login'),
               onPressed: () {
