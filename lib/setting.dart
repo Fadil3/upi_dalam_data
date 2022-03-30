@@ -1,8 +1,20 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-Widget settingPage(){
-  return const Text(
-    'Index 3: Setting',
-    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-  );
+class Setting extends StatefulWidget {
+  const Setting({Key? key}) : super(key: key);
+
+  @override
+  State<Setting> createState() => _SettingState();
+}
+
+class _SettingState extends State<Setting> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: const Text("ini halaman Setting"),
+      ),
+    );
+  }
 }
