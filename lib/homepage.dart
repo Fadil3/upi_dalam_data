@@ -15,10 +15,9 @@ class _HomePageState extends State<HomePage> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final List<Widget> _widgetOptions = <Widget>[
-    // button click
-    home(),
-    contactPage(),
-    settingPage(),
+    const Home(),
+    const Contact(),
+    const Setting(),
   ];
 
   void _onItemTapped(int index) {
