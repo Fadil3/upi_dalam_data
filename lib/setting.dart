@@ -1,8 +1,17 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 Widget settingPage(){
-  return const Text(
-    'Index 3: Setting',
-    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+  return Column(
+    children: [
+      SizedBox(
+        height: 115,
+        width: 115,
+        child: CircleAvatar(
+          backgroundImage: AssetImage("assets/images/Profile Image.png"),
+        ),
+      )
+    ],
   );
 }
