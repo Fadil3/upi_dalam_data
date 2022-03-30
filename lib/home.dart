@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:upi_dalam_data/dosen.dart';
+import 'package:upi_dalam_data/mahasiswa.dart';
 import './prodi.dart';
 
 class Home extends StatefulWidget {
@@ -49,7 +51,11 @@ class _HomeState extends State<Home> {
                           icon: const Text('Lihat'),
                           label: const Icon(Icons.arrow_forward_rounded),
                           onPressed: () {
-                            /* ... */
+                            // navigate to dosen
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Dosen()),
+                            );
                           },
                         ),
                       ]),
@@ -143,7 +149,11 @@ class _HomeState extends State<Home> {
                           icon: const Text('Lihat'),
                           label: const Icon(Icons.arrow_forward_rounded),
                           onPressed: () {
-                            /* ... */
+                            //navigate to mahasiswa
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Mahasiswa()));
                           },
                         ),
                       ]),
