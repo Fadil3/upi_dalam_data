@@ -9,7 +9,7 @@ Widget settingPage(){
         height: 115,
         width: 115,
         child: CircleAvatar(
-          backgroundImage: AssetImage("assets/images/Profile Image.png"),
+          backgroundImage: NetworkImage("https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2022/01/21/992560672.png"),
         ),
       )
     ],
