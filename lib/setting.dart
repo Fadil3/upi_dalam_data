@@ -27,8 +27,25 @@ Widget settingPage(){
             fontSize: 18,
           ),
           textAlign: TextAlign.center,
-          ),
+        ),
       ),
+
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.blue, // background
+          onPrimary: Colors.white, // foreground
+        ),
+        onPressed: () { },
+        child: Text('Ganti Bahasa'),
+      ),
+
+      TextButton(
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.grey),
+        ),
+        onPressed: () {},
+        child: Text('Logout'),
+      )
 
     ],
   );
