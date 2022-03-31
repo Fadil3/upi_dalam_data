@@ -13,21 +13,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: '_title',
-      home: MyStatefulWidget(),
+      home: ChartPelatihan(),
     );
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+class ChartPelatihan extends StatefulWidget {
+  const ChartPelatihan({Key? key}) : super(key: key);
 
   @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+  State<ChartPelatihan> createState() => _ChartPelatihanState();
 }
 
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _ChartPelatihanState extends State<ChartPelatihan> {
   late List<GDPData> _chartData;
   late TooltipBehavior _tooltipBehavior;
 
@@ -37,24 +37,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     _tooltipBehavior = TooltipBehavior(enable: true);
     super.initState();
   }
-
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  final List<Widget> _widgetOptions = <Widget>[];
-
   List<GDPData> getChartData() {
     final List<GDPData> chartData = [
       GDPData('Yang sudah', 1600),
       GDPData('Yang belum', 2490),
     ];
     return chartData;
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 
   @override
@@ -71,37 +59,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             dataSource: _chartData,
             xValueMapper: (GDPData data, _) => data.continent,
             yValueMapper: (GDPData data, _) => data.gdp, // PieSeries
-            dataLabelSettings: DataLabelSettings(isVisible: true),
+            dataLabelSettings: const DataLabelSettings(isVisible: true),
             enableTooltip: true)
       ],
     )));
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
-      ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.contacts),
-            label: 'Contact',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Setting',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.teal[400],
-        onTap: _onItemTapped,
-      ),
-    );
   }
 }
 
