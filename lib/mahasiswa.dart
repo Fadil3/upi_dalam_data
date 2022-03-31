@@ -40,13 +40,24 @@ class _MahasiswaState extends State<Mahasiswa> {
           ),
           SizedBox(
             width: 300,
-            height: 50,
-            child: Card(
-                elevation: 2,
-                child: Text(
-                  "Jumlah Mahasiwa Pendidikan Indonesia",
-                  textAlign: TextAlign.center,
-                )),
+            child: Column(children: [
+              Card(
+                  elevation: 2,
+                  child: Column(
+                    children: [
+                      const Text(
+                          "Jumlah Mahasiswa Universitas Pendidikan Indonesia",
+                          textAlign: TextAlign.center),
+                      const Text(
+                        '41.633',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                    ],
+                  )),
+            ]),
           ),
           const Padding(
             padding: EdgeInsets.all(20),
