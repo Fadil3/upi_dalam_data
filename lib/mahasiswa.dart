@@ -44,11 +44,11 @@ class _MahasiswaState extends State<Mahasiswa> {
               Card(
                   elevation: 2,
                   child: Column(
-                    children: [
-                      const Text(
+                    children: const [
+                      Text(
                           "Jumlah Mahasiswa Universitas Pendidikan Indonesia",
                           textAlign: TextAlign.center),
-                      const Text(
+                      Text(
                         '41.633',
                         style: TextStyle(
                             fontSize: 16,
@@ -62,53 +62,53 @@ class _MahasiswaState extends State<Mahasiswa> {
           const Padding(
             padding: EdgeInsets.all(20),
           ),
-          Container(
+          SizedBox(
             width: 300,
             height: 35,
             child: ElevatedButton(
               onPressed: () {
                 // Respond to button press
               },
-              child: Text('DATA MAHASISWA BELUM BAYAR UKT'),
+              child: const Text('DATA MAHASISWA BELUM BAYAR UKT'),
             ),
           ),
           const Padding(
             padding: EdgeInsets.all(20),
           ),
-          Container(
+          SizedBox(
             width: 300,
             height: 35,
             child: ElevatedButton(
               onPressed: () {
                 // Respond to button press
               },
-              child: Text('RATA-RATA LAMA STUDI'),
+              child: const Text('RATA-RATA LAMA STUDI'),
             ),
           ),
           const Padding(
             padding: EdgeInsets.all(20),
           ),
-          Container(
+          SizedBox(
             width: 300,
             height: 35,
             child: ElevatedButton(
               onPressed: () {
                 // Respond to button press
               },
-              child: Text('MAHASISWA PROGRAM DI LUAR KAMPUS'),
+              child: const Text('MAHASISWA PROGRAM DI LUAR KAMPUS'),
             ),
           ),
           const Padding(
             padding: EdgeInsets.all(20),
           ),
-          Container(
+          SizedBox(
             width: 300,
             height: 35,
             child: ElevatedButton(
               onPressed: () {
                 // Respond to button press
               },
-              child: Text('DATA PENGAJUAN BEASISWA'),
+              child: const Text('DATA PENGAJUAN BEASISWA'),
             ),
           ),
           const Padding(
