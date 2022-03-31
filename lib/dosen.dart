@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:upi_dalam_data/pengabdian_chart.dart';
 
 class Dosen extends StatefulWidget {
   const Dosen({Key? key}) : super(key: key);
@@ -120,7 +121,14 @@ class _DosenState extends State<Dosen> {
                                   icon: const Text('Lihat'),
                                   label:
                                       const Icon(Icons.arrow_forward_rounded),
-                                  onPressed: () {}))
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ChartPengabdian()),
+                                    );
+                                  }))
                             ]),
                             DataRow(cells: [
                               const DataCell(Text('Pelatihan')),
