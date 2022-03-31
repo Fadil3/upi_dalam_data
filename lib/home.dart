@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 450,
+                width: 350,
                 child: InkWell(
                   splashColor: Colors.blue.withAlpha(30),
                   onTap: () {
@@ -80,44 +80,47 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 450,
-                child: Column(mainAxisSize: MainAxisSize.min, children: [
+                width: 350,
+                child: InkWell(
+                  splashColor: Colors.blue.withAlpha(30),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Mahasiswa()),
+                    );
+                  },
+                  child: 
                   Card(
-                      child: Column(
+                    semanticContainer: true,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    child: Column(
                     children: [
                       Image.network(
-                        'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+                        'https://images.unsplash.com/photo-1606761568499-6d2451b23c66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80',
                         fit: BoxFit.cover,
                       ),
                       ListTile(
-                        title: const Text('Data Program Studi'),
+                        title: const Text('Data Mahasiswa'),
                         subtitle: Text(
                           'Penelitian, Pengabdian, dan Pengajaran',
                           style:
                               TextStyle(color: Colors.black.withOpacity(0.6)),
                         ),
-                        leading: const Icon(Icons.supervisor_account_outlined),
+                        leading: const Icon(Icons.school_outlined),
                       ),
-                      ButtonBar(alignment: MainAxisAlignment.center, children: [
-                        TextButton.icon(
-                          icon: const Text('Lihat'),
-                          label: const Icon(Icons.arrow_forward_rounded),
-                          onPressed: () {
-                            // navigate to prodi page
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Prodi()));
-                          },
-                        ),
-                      ]),
                     ],
-                  )),
-                  const Padding(padding: EdgeInsets.all(8.0)),
-                ]),
+                    
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                    elevation: 5,
+                  ),
+                ),
               ),
             ],
           ),
+          const Padding(padding: EdgeInsets.all(10.0)),
         ],
       ),
       Column(
@@ -129,47 +132,51 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 450,
-                child: Column(mainAxisSize: MainAxisSize.min, children: [
+                width: 350,
+                child: InkWell(
+                  splashColor: Colors.blue.withAlpha(30),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Prodi()),
+                    );
+                  },
+                  child: 
                   Card(
-                      child: Column(
+                    semanticContainer: true,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    child: Column(
                     children: [
                       Image.network(
-                        'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+                        'https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=886&q=80',
                         fit: BoxFit.cover,
                       ),
                       ListTile(
-                        title: const Text('Data Mahasiswa'),
+                        title: const Text('Data Prodi'),
                         subtitle: Text(
                           'Penelitian, Pengabdian, dan Pengajaran',
                           style:
                               TextStyle(color: Colors.black.withOpacity(0.6)),
                         ),
-                        leading: const Icon(Icons.supervisor_account_outlined),
+                        leading: const Icon(Icons.home_work_outlined),
                       ),
-                      ButtonBar(alignment: MainAxisAlignment.center, children: [
-                        TextButton.icon(
-                          icon: const Text('Lihat'),
-                          label: const Icon(Icons.arrow_forward_rounded),
-                          onPressed: () {
-                            //navigate to mahasiswa
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Mahasiswa()));
-                          },
-                        ),
-                      ]),
                     ],
-                  )),
-                  const Padding(padding: EdgeInsets.all(8.0)),
-                ]),
+                    
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                    elevation: 5,
+                  ),
+                ),
               ),
             ],
           ),
+          const Padding(padding: EdgeInsets.all(10.0)),
         ],
       ),
     ],
-  )); 
+    )
+  ); 
   }
 }
