@@ -29,9 +29,19 @@ class _HomeState extends State<Home> {
             children: [
               SizedBox(
                 width: 450,
-                child: Column(mainAxisSize: MainAxisSize.min, children: [
+                child: InkWell(
+                  splashColor: Colors.blue.withAlpha(30),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Dosen()),
+                    );
+                  },
+                  child: 
                   Card(
-                      child: Column(
+                    semanticContainer: true,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    child: Column(
                     children: [
                       Image.network(
                         'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
@@ -46,26 +56,19 @@ class _HomeState extends State<Home> {
                         ),
                         leading: const Icon(Icons.supervisor_account_outlined),
                       ),
-                      ButtonBar(alignment: MainAxisAlignment.center, children: [
-                        TextButton.icon(
-                          icon: const Text('Lihat'),
-                          label: const Icon(Icons.arrow_forward_rounded),
-                          onPressed: () {
-                            // navigate to dosen
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Dosen()),
-                            );
-                          },
-                        ),
-                      ]),
                     ],
-                  )),
-                  const Padding(padding: EdgeInsets.all(8.0)),
-                ]),
+                    
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                    elevation: 5,
+                  ),
+                ),
               ),
             ],
           ),
+          const Padding(padding: EdgeInsets.all(10.0)),
         ],
       ),
       Column(
