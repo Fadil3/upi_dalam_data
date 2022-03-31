@@ -37,6 +37,36 @@ class _ContactState extends State<Contact> {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset(
+              "images/logo-upi.png",
+              height: 100,
+              width: 100,
+            ),
+            const Padding(padding: EdgeInsets.all(5.0)),
+            SizedBox(
+              width: 300,
+              child:
+                Column(children: [
+                  Card(
+                      elevation: 2,
+                      child: Column(
+                        children: const [
+                          Text(
+                            "CONTACT US",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      )
+                  ),
+                ]
+              ),
+            ),
+
+            const Padding(padding: EdgeInsets.all(20.0)),
+            
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
