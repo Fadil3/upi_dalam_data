@@ -92,7 +92,7 @@ class _DosenState extends State<Dosen> {
                         const Padding(
                           padding: EdgeInsets.all(10), //20 pixel ke semua arah
                         ),
-                        DataTable(columns: [
+                        DataTable(columns: const [
                           DataColumn(
                             label: Text('Data'),
                           ),
