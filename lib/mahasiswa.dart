@@ -11,19 +11,6 @@ class Mahasiswa extends StatefulWidget {
 }
 
 class _MahasiswaState extends State<Mahasiswa> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  final List<Widget> _widgetOptions = <Widget>[
-    const Home(),
-    const Contact(),
-    const Setting(),
-  ];
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,25 +102,6 @@ class _MahasiswaState extends State<Mahasiswa> {
             padding: EdgeInsets.all(20),
           ),
         ]),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.contacts),
-            label: 'Contact',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Setting',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.teal[400],
-        onTap: _onItemTapped,
       ),
     );
   }
