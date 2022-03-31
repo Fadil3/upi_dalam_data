@@ -1,10 +1,20 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-Widget contactPage() {
-  const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  return const Text(
-    'Index 1: Contact',
-    style: optionStyle,
-  );
+class Contact extends StatefulWidget {
+  const Contact({Key? key}) : super(key: key);
+
+  @override
+  State<Contact> createState() => _ContactState();
+}
+
+class _ContactState extends State<Contact> {
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: const Text("ini halaman Contact"),
+      ),
+    );
+  }
 }
