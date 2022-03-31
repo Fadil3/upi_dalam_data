@@ -11,7 +11,7 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
-   return Column(
+  return Column(
     children: [
 
       Padding(
@@ -29,7 +29,7 @@ class _SettingPageState extends State<SettingPage> {
       Padding(
         padding: EdgeInsets.all(16.0),
         child: Text(
-          'Asep Knalpot\n1900141\nIlmu Komputer',
+          'Dadang Dindang',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18,
