@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upi_dalam_data/dosen.dart';
 import 'package:upi_dalam_data/mahasiswa.dart';
-import './prodi.dart';
+import 'fakultas.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -138,7 +138,7 @@ class _HomeState extends State<Home> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Prodi()),
+                      MaterialPageRoute(builder: (context) => Fakultas()),
                     );
                   },
                   child: 
@@ -152,7 +152,7 @@ class _HomeState extends State<Home> {
                         fit: BoxFit.cover,
                       ),
                       ListTile(
-                        title: const Text('Data Prodi'),
+                        title: const Text('Fakultas dan Prodi'),
                         subtitle: Text(
                           'Penelitian, Pengabdian, dan Pengajaran',
                           style:
