@@ -15,34 +15,39 @@ class _FakultasState extends State<Fakultas> {
           "images/fakultas/FPMIPA.jpg",
     },
     {
-      "name": "GoCar",
+      "name": "FIP",
       "url_image":
-          "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg"
+          "images/fakultas/FIP.png"
     },
     {
-      "name": "GoFood",
+      "name": "FPIPS",
       "url_image":
-          "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg"
+          "images/fakultas/FPIPS.jpg"
     },
     {
-      "name": "GoSend",
+      "name": "FPBS",
       "url_image":
-          "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg"
+          "images/fakultas/FPBS.jpg"
     },
     {
-      "name": "GoMart",
+      "name": "FPSD",
       "url_image":
-          "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg"
+          "images/fakultas/FPSD.jpg"
     },
     {
-      "name": "GoPulsa",
+      "name": "FPTK",
       "url_image":
-          "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg"
+          "images/fakultas/FPTK.jpg"
     },
     {
-      "name": "Check in",
+      "name": "FPOK",
       "url_image":
-          "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg"
+          "images/fakultas/FPOK.jpg"
+    },
+    {
+      "name": "FPEB",
+      "url_image":
+          "images/fakultas/FPEB.jpeg"
     },
   ];
 
