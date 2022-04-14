@@ -26,16 +26,30 @@ class _SettingPageState extends State<SettingPage> {
         ),
       ),
 
-      Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Text(
-          'Dadang Dindang',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+      Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 8),
+            child: Text(
+              'Dadang Dindang',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
+              textAlign: TextAlign.center,
+            ),
           ),
-          textAlign: TextAlign.center,
-        ),
+            Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: Text(
+                '2009017502',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+        ],
       ),
 
       ElevatedButton(
