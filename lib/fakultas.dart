@@ -55,27 +55,27 @@ class _FakultasState extends State<Fakultas> {
     {
       "name": "Tasikmalaya",
       "url_image":
-          "https://play-lh.googleusercontent.com/6Uh3fVuBpOZPo2Bkor2rlh1KSrAQj82611ZK4ahzL0gfSFxjhgEdfBRKeSgwrHi2v4I"
+          "images/fakultas/Tasikmalaya.jpg"
     },
     {
       "name": "Cibiru",
       "url_image":
-          "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg"
+          "images/fakultas/Cibiru.jpeg"
     },
     {
       "name": "Sumedang",
       "url_image":
-          "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg"
+          "images/fakultas/Sumedang.jpg"
     },
     {
       "name": "Purwakarta",
       "url_image":
-          "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg"
+          "images/fakultas/Purwakarta.jpg"
     },
     {
       "name": "Serang",
       "url_image":
-          "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg"
+          "images/fakultas/Serang.jpg"
     }
   ];
   @override
@@ -144,7 +144,7 @@ class _FakultasState extends State<Fakultas> {
               child: SizedBox(
             width: 480,
             child: Wrap(spacing: 20.0, runSpacing: 20.0, children: [
-              ...listFakultas.map(
+              ...listKamda.map(
                 (e) => Column(
                   children: [
                     Container(
@@ -153,7 +153,7 @@ class _FakultasState extends State<Fakultas> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                          image: NetworkImage(e["url_image"]),
+                          image: AssetImage(e["url_image"]),
                           fit: BoxFit.cover,
                         ),
                       ),
