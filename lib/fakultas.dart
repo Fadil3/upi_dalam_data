@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import 'detail_fakultas.dart';
+
 class Fakultas extends StatefulWidget {
   const Fakultas({Key? key}) : super(key: key);
 
@@ -63,7 +65,9 @@ class _FakultasState extends State<Fakultas> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Fakultas()),
+                        // bring state to detail fakultas
+                        MaterialPageRoute(
+                            builder: (context) => DetailFakultas(e["name"])),
                       );
                     },
                     child: Container(
