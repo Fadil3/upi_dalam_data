@@ -25,11 +25,23 @@ class _FakultasState extends State<Fakultas> {
   ];
 
   List<Map> listKamda = [
-    {"name": "Tasikmalaya", "url_image": "images/fakultas/Tasikmalaya.jpg"},
-    {"name": "Cibiru", "url_image": "images/fakultas/Cibiru.jpeg"},
-    {"name": "Sumedang", "url_image": "images/fakultas/Sumedang.jpg"},
-    {"name": "Purwakarta", "url_image": "images/fakultas/Purwakarta.jpg"},
-    {"name": "Serang", "url_image": "images/fakultas/Serang.jpg"}
+    {
+      "name": "Kampus Daerah Tasikmalaya",
+      "url_image": "images/fakultas/Tasikmalaya.jpg"
+    },
+    {
+      "name": "Kampus Daerah Cibiru",
+      "url_image": "images/fakultas/Cibiru.jpeg"
+    },
+    {
+      "name": "Kampus Daerah Sumedang",
+      "url_image": "images/fakultas/Sumedang.jpg"
+    },
+    {
+      "name": "Kampus Daerah Purwakarta",
+      "url_image": "images/fakultas/Purwakarta.jpg"
+    },
+    {"name": "Kampus Daerah Serang", "url_image": "images/fakultas/Serang.jpg"}
   ];
   @override
   Widget build(BuildContext context) {
@@ -110,14 +122,25 @@ class _FakultasState extends State<Fakultas> {
             ...listKamda.map(
               (e) => Column(
                 children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        image: AssetImage(e["url_image"]),
-                        fit: BoxFit.cover,
+                  InkWell(
+                    splashColor: Colors.blue.withAlpha(30),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        // bring state to detail fakultas
+                        MaterialPageRoute(
+                            builder: (context) => DetailFakultas(e["name"])),
+                      );
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: AssetImage(e["url_image"]),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
