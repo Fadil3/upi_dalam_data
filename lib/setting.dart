@@ -76,12 +76,12 @@ class _SettingPageState extends State<SettingPage> {
         ),
       ),
 
-      ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: Colors.blue, // background
-          onPrimary: Colors.white, // foreground
+      TextButton(
+        style: TextButton.styleFrom(
+          primary: Colors.white,
+          backgroundColor: Colors.blue
         ),
-        onPressed: () { },
+        onPressed: () {},
         child: Text('Ganti Bahasa'),
       ),
 
@@ -92,7 +92,6 @@ class _SettingPageState extends State<SettingPage> {
         onPressed: () {},
         child: Text('Logout'),
       )
-
     ],
   );
   }
