@@ -41,15 +41,32 @@ final List<Entry> data = <Entry>[
     ],
   ),
   // Second Row
-  Entry('Fakultas', <Entry>[
-    Entry('FPMIPA'),
-    Entry('FIP'),
-    Entry('FPIPS'),
-    Entry('FPBS'),
-    Entry('FPTK'),
-    Entry('FPOK'),
-    Entry('FPEB'),
-    Entry('FPSD'),
+  Entry(
+    'Fakultas',
+    <Entry>[
+      Entry(
+        ' FPMIPA',
+        <Entry>[
+          Entry('   Pendidika Ilmu Komputer'),
+          Entry('   Ilmu Komputer'),
+          Entry('   Pendidika Kimia'),
+          Entry('   Kimia'),
+          Entry('   Pendidika Biologi'),
+          Entry('   Biologi'),
+          Entry('   Pendidika Fisika'),
+          Entry('   Fisika'),
+          Entry('   Pendidika Matematika'),
+          Entry('   Matematika'),
+          Entry('   IPSE'),
+        ]
+      ),
+      Entry('FIP'),
+      Entry('FPIPS'),
+      Entry('FPBS'),
+      Entry('FPTK'),
+      Entry('FPOK'),
+      Entry('FPEB'),
+      Entry('FPSD'),
   ]),
   // Entry(
   //   'Chapter C',
