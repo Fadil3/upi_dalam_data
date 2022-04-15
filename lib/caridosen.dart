@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const CariDosen());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class CariDosen extends StatefulWidget {
+  const CariDosen({Key? key}) : super(key: key);
   @override
-  MyAppState createState() {
-    return MyAppState();
+  CariDosenState createState() {
+    return CariDosenState();
   }
 }
 
-class MyAppState extends State<MyApp> {
+class CariDosenState extends State<CariDosen> {
   final textEditController = TextEditingController();
   String dropdownvalue = '↑ Nama';
   var items = [
