@@ -73,7 +73,7 @@ class _MahasiswaUKTState extends State<MahasiswaUKT> {
                               ],
                             )),
                         SizedBox(
-                            width: 450,
+                            width: 600,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
