@@ -12,7 +12,7 @@ class _SettingPageState extends State<SettingPage> {
   TableRow buildRow(List<String> cells) => TableRow(
     children: cells.map((cell){
       return Padding(
-        padding: EdgeInsets.all(12),
+        padding: EdgeInsets.all(8),
         child: Text(cell),
       );
     }).toList()
@@ -68,7 +68,9 @@ class _SettingPageState extends State<SettingPage> {
         defaultColumnWidth: FixedColumnWidth(200),
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
         children: [
-          buildRow(['Jabatan', 'Ketua Departemen Ilmu Komputer'])
+          buildRow(['Jabatan', 'Ketua Departemen Ilmu Komputer']),
+          buildRow(['Pendidikan', 'S3']),
+          buildRow(['Status Aktivasi', 'Aktif'])
         ],
       ),
 
