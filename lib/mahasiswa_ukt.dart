@@ -35,37 +35,34 @@ class _MahasiswaUKTState extends State<MahasiswaUKT> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Card(
-                                    child: Column(children: [
-                                  const Padding(
+                                    child: Column(children: const [
+                                  Padding(
                                     padding: EdgeInsets.all(
                                         10), //20 pixel ke semua arah
                                   ),
-                                  const Text(
-                                    'Jumlah Mahasiswa Belum Bayar UKT',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
+                                  Padding(
+                                    padding: EdgeInsets.all(2),
+                                    child: Text(
+                                      'Jumlah Mahasiswa Belum Bayar UKT \n Universitas Pendidikan Indonesia',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ), //20 pixel ke semua arah
                                   ),
-                                  const Text(
-                                    'Universitas Pendidikan Indonesia',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                  const Padding(
+                                  Padding(
                                     padding: EdgeInsets.all(
-                                        10), //20 pixel ke semua arah
+                                        5), //20 pixel ke semua arah
                                   ),
-                                  const Text(
+                                  Text(
                                     '52',
                                     style: TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.red),
                                   ),
-                                  const Padding(
+                                  Padding(
                                     padding: EdgeInsets.all(
                                         10), //20 pixel ke semua arah
                                   )
@@ -114,47 +111,59 @@ class _MahasiswaUKTState extends State<MahasiswaUKT> {
                                     DataColumn(
                                       label: Text('Tagihan'),
                                     ),
-                                  ], rows: [
+                                  ], rows: const [
                                     DataRow(cells: [
-                                      const DataCell(Text('FPMIPA')),
-                                      const DataCell(Text('Ilmu Komputer')),
-                                      const DataCell(Text('6')),
-                                      const DataCell(Text('123456')),
-                                      const DataCell(Text('2.000.000')),
+                                      DataCell(Text('FPMIPA')),
+                                      DataCell(Text('Ilmu Komputer')),
+                                      DataCell(Text('6')),
+                                      DataCell(Text('123456')),
+                                      DataCell(Text('2.000.000')),
                                     ]),
                                     DataRow(cells: [
-                                      const DataCell(Text('FPMIPA')),
-                                      const DataCell(Text('Ilmu Komputer')),
-                                      const DataCell(Text('6')),
-                                      const DataCell(Text('123456')),
-                                      const DataCell(Text('2.000.000')),
+                                      DataCell(Text('FPMIPA')),
+                                      DataCell(Text('Ilmu Komputer')),
+                                      DataCell(Text('6')),
+                                      DataCell(Text('123456')),
+                                      DataCell(Text('2.000.000')),
                                     ]),
                                     DataRow(cells: [
-                                      const DataCell(Text('FPMIPA')),
-                                      const DataCell(Text('Ilmu Komputer')),
-                                      const DataCell(Text('6')),
-                                      const DataCell(Text('123456')),
-                                      const DataCell(Text('2.000.000')),
+                                      DataCell(Text('FPMIPA')),
+                                      DataCell(Text('Ilmu Komputer')),
+                                      DataCell(Text('6')),
+                                      DataCell(Text('123456')),
+                                      DataCell(Text('2.000.000')),
                                     ]),
                                     DataRow(cells: [
-                                      const DataCell(Text('FPMIPA')),
-                                      const DataCell(Text('Ilmu Komputer')),
-                                      const DataCell(Text('6')),
-                                      const DataCell(Text('123456')),
-                                      const DataCell(Text('2.000.000')),
+                                      DataCell(Text('FPMIPA')),
+                                      DataCell(Text('Ilmu Komputer')),
+                                      DataCell(Text('6')),
+                                      DataCell(Text('123456')),
+                                      DataCell(Text('2.000.000')),
                                     ]),
                                   ])
                                 ])),
                               ],
                             )),
+                        const Padding(padding: EdgeInsets.all(10)),
                         SizedBox(
                           width: 300,
                           height: 35,
                           child: ElevatedButton(
-                            onPressed: () {
-                              // Respond to button press
-                            },
-                            child: const Text('Download as CSV'),
+                            onPressed: () {},
+                            child: Wrap(
+                              children: const <Widget>[
+                                Icon(
+                                  Icons.download,
+                                  color: Colors.white,
+                                  size: 20.0,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text("Download as CSV",
+                                    style: TextStyle(fontSize: 16)),
+                              ],
+                            ),
                           ),
                         ),
                         const Padding(padding: EdgeInsets.all(8.0)),
