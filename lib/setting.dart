@@ -76,13 +76,16 @@ class _SettingPageState extends State<SettingPage> {
         ),
       ),
 
-      TextButton(
-        style: TextButton.styleFrom(
-          primary: Colors.white,
-          backgroundColor: Colors.blue
+      Padding(
+        padding: const EdgeInsets.only(top: 12),
+        child: TextButton(
+          style: TextButton.styleFrom(
+            primary: Colors.white,
+            backgroundColor: Colors.blue
+          ),
+          onPressed: () {},
+          child: Text('Ganti Bahasa'),
         ),
-        onPressed: () {},
-        child: Text('Ganti Bahasa'),
       ),
 
       TextButton(
