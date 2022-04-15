@@ -20,8 +20,8 @@ class CariDosenState extends State<CariDosen> {
     '↓ Nama',
     '↑ Jabatan',
     '↓ Jabatan',
-    '↑ Pangkat',
-    '↓ Pangkat',
+    '↑ Golongan',
+    '↓ Golongan',
   ];
 
   TableRow buildRow(List<String> cells) => TableRow(
@@ -51,23 +51,23 @@ class CariDosenState extends State<CariDosen> {
           children: [
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Row(
+              child: Column(
                 children: [
+                  SizedBox(
+                    width: 500,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        labelText: 'Cari Dosen',
+                        border: const OutlineInputBorder(),
+                      ),
+                    ),
+                  ),
                   Text(
                     'Urutkan berdasarkan:',
                     style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 32, 30, 30)),
-                  ),
-                  SizedBox(
-                    width: 300,
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        labelText: 'NIM / NIP / NIDN',
-                        border: const OutlineInputBorder(),
-                      ),
-                    ),
                   ),
                   DropdownButton(
                     // Initial Value
@@ -102,21 +102,55 @@ class CariDosenState extends State<CariDosen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Card(
-                                child: Table(
-                                  defaultColumnWidth: IntrinsicColumnWidth(),
-                                  defaultVerticalAlignment:
-                                      TableCellVerticalAlignment.middle,
-                                  children: [
-                                    buildRow([
-                                      'Al Tair MT',
-                                      'Guru Besar',
-                                      'PU',
-                                    ]),
-                                  ],
+                            padding: EdgeInsets.all(10),
+                            child: Card(
+                                child: Column(children: [
+                              const Padding(
+                                padding:
+                                    EdgeInsets.all(10), //20 pixel ke semua arah
+                              ),
+                              const Padding(
+                                padding:
+                                    EdgeInsets.all(10), //20 pixel ke semua arah
+                              ),
+                              const Text(
+                                'Daftar Dosen',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              ),
+                              const Padding(
+                                padding:
+                                    EdgeInsets.all(10), //20 pixel ke semua arah
+                              ),
+                              DataTable(columns: const [
+                                DataColumn(
+                                  label: Text('Nama'),
                                 ),
-                              )),
+                                DataColumn(
+                                  label: Text('Jabatan'),
+                                ),
+                                DataColumn(
+                                  label: Text('Golongan'),
+                                ),
+                                DataColumn(
+                                  label: Text(''),
+                                ),
+                              ], rows: [
+                                DataRow(cells: [
+                                  DataCell(Text('Fadlurahman MT')),
+                                  DataCell(Text('Guru Besar')),
+                                  DataCell(Text('IV/d')),
+                                  DataCell(TextButton(
+                                      onPressed: () {
+                                        // aksi jika ditap
+                                      },
+                                      child: const Text('Lihat')))
+                                ]),
+                              ])
+                            ])),
+                          ),
                         ],
                       )),
                 ])
