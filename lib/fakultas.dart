@@ -51,7 +51,7 @@ class _FakultasState extends State<Fakultas> {
       ),
       body: SingleChildScrollView(
           child: Column(children: [
-        const Padding(padding: EdgeInsets.all(20)),
+        const Padding(padding: EdgeInsets.all(10)),
         SizedBox(
           width: 480,
           child: Row(
@@ -64,7 +64,7 @@ class _FakultasState extends State<Fakultas> {
                     )),
               ]),
         ),
-        const Padding(padding: EdgeInsets.all(20)),
+        const Padding(padding: EdgeInsets.all(10)),
         Center(
             child: SizedBox(
           width: 480,
@@ -102,7 +102,7 @@ class _FakultasState extends State<Fakultas> {
             ),
           ]),
         )),
-        const Padding(padding: EdgeInsets.all(20)),
+        const Padding(padding: EdgeInsets.all(10)),
         SizedBox(
           width: 480,
           child: Row(
@@ -115,7 +115,7 @@ class _FakultasState extends State<Fakultas> {
                     )),
               ]),
         ),
-        const Padding(padding: EdgeInsets.all(20)),
+        const Padding(padding: EdgeInsets.all(10)),
         Center(
             child: SizedBox(
           width: 480,
@@ -130,7 +130,7 @@ class _FakultasState extends State<Fakultas> {
                         context,
                         // bring state to detail fakultas
                         MaterialPageRoute(
-                            builder: (context) => DetailFakultas(e["name"])),
+                            builder: (context) => DetailFakultas("FPMIPA")),
                       );
                     },
                     child: Container(
