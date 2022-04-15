@@ -49,18 +49,18 @@ final List<Entry> data = <Entry>[
         <Entry>[
           Entry('   Dekan FPMIPA\n    iniemailfpmipa@upi.edu\n    08123123123'),
           Entry('   Wakil Dekan FPMIPA\n    emailwakilfpmipa@upi.edu\n    083211233133'),
-          Entry('   Pendidikan Ilmu Komputer'),
-          Entry('   Ilmu Komputer'),
-          Entry('   Pendidika Kimia'),
-          Entry('   Kimia'),
-          Entry('   Pendidika Biologi'),
-          Entry('   Biologi'),
-          Entry('   Pendidika Fisika'),
-          Entry('   Fisika'),
-          Entry('   Pendidika Matematika'),
-          Entry('   Matematika'),
-          Entry('   IPSE'),
-        ]
+          Entry(
+            '   Departemen',
+            <Entry>[
+              Entry('     Pendidikan Ilmu Komputer'),
+              Entry('     Pendidika Kimia'),
+              Entry('     Pendidika Biologi'),
+              Entry('     Pendidika Fisika'),
+              Entry('     Pendidika Matematika'),
+              Entry('     IPSE')
+            ],
+          ),
+        ],
       ),
       Entry('FIP'),
       Entry('FPIPS'),
