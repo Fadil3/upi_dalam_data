@@ -79,7 +79,7 @@ class _MahasiswaState extends State<Mahasiswa> {
                       ListTile(
                         title: const Text('Data Belum Bayar UKT'),
                         subtitle: Text(
-                          'Jumlah Belum Bayar UKT:                        52 Mahasiswa',
+                          'Jumlah Belum Bayar UKT: \n52 Mahasiswa',
                           style:
                               TextStyle(color: Colors.black.withOpacity(0.6)),
                         ),
@@ -111,7 +111,7 @@ class _MahasiswaState extends State<Mahasiswa> {
                       ListTile(
                         title: const Text('Rata-rata Lama Studi'),
                         subtitle: Text(
-                          'Rata-rata Lama Studi Mahasiswa:                4 Tahun',
+                          'Rata-rata Lama Studi Mahasiswa: \n4 Tahun',
                           style:
                               TextStyle(color: Colors.black.withOpacity(0.6)),
                         ),
@@ -143,7 +143,7 @@ class _MahasiswaState extends State<Mahasiswa> {
                       ListTile(
                         title: const Text('Mahasiswa Program di Luar Kampus'),
                         subtitle: Text(
-                          'Jumlah Mahasiswa Program di Luar Kampus: 20 Mahasiswa',
+                          'Jumlah Mahasiswa Program di Luar Kampus: \n20 Mahasiswa',
                           style:
                               TextStyle(color: Colors.black.withOpacity(0.6)),
                         ),
@@ -175,7 +175,7 @@ class _MahasiswaState extends State<Mahasiswa> {
                       ListTile(
                         title: const Text('Data Pengajuan Beasiswa'),
                         subtitle: Text(
-                          'Jumlah Mahasiswa yang Mengajukan Beasiswa: 15 Mahasiswa',
+                          'Jumlah Mahasiswa yang Mengajukan Beasiswa:\n15 Mahasiswa',
                           style:
                               TextStyle(color: Colors.black.withOpacity(0.6)),
                         ),
