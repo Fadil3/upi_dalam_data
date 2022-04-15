@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:upi_dalam_data/contact.dart';
 import "package:upi_dalam_data/home.dart";
+import 'package:upi_dalam_data/mahasiswa_ukt.dart';
 import 'package:upi_dalam_data/setting.dart';
 
 class Mahasiswa extends StatefulWidget {
@@ -56,7 +57,12 @@ class _MahasiswaState extends State<Mahasiswa> {
               width: 350,
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MahasiswaUKT()),
+                  );
+                },
                 child: Card(
                   semanticContainer: true,
                   clipBehavior: Clip.antiAliasWithSaveLayer,
