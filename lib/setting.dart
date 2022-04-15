@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import 'package:upi_dalam_data/home.dart';
+import 'package:upi_dalam_data/main.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -79,7 +81,13 @@ class _SettingPageState extends State<SettingPage> {
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all<Color>(Colors.grey),
           ),
-          onPressed: () {},
+          onPressed: () {
+            // back to the login page
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
+          },
           child: Text('Logout'),
         )
       ],
