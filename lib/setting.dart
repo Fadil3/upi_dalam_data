@@ -63,15 +63,17 @@ class _SettingPageState extends State<SettingPage> {
         ],
       ),
 
-      Table(
-        border: TableBorder.all(),
-        defaultColumnWidth: IntrinsicColumnWidth(),
-        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-        children: [
-          buildRow(['Jabatan', ':' ,'Ketua Departemen Ilmu Komputer']),
-          buildRow(['Pendidikan', ':', 'S3']),
-          buildRow(['Status Aktivasi', ':', 'Aktif'])
-        ],
+      Padding(
+        padding: const EdgeInsets.only(top: 12),
+        child: Table(
+          defaultColumnWidth: IntrinsicColumnWidth(),
+          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+          children: [
+            buildRow(['Jabatan', ':' ,'Ketua Departemen Ilmu Komputer']),
+            buildRow(['Pendidikan', ':', 'S3']),
+            buildRow(['Status Aktivasi', ':', 'Aktif'])
+          ],
+        ),
       ),
 
       ElevatedButton(
