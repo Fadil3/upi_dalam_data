@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import 'package:upi_dalam_data/home.dart';
+import 'package:upi_dalam_data/main.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -8,54 +10,87 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
+  TableRow buildRow(List<String> cells) => TableRow(
+          children: cells.map((cell) {
+        return Padding(
+          padding: EdgeInsets.all(8),
+          child: Text(cell),
+        );
+      }).toList());
 
   @override
   Widget build(BuildContext context) {
-  return Column(
-    children: [
-
-      Padding(
-        padding: EdgeInsets.all(20)
-      ),
-
-      SizedBox(
-        height: 115,
-        width: 115,
-        child: CircleAvatar(
-          backgroundImage: NetworkImage("https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2022/01/21/992560672.png"),
-        ),
-      ),
-
-      Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Text(
-          'Dadang Dindang',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
+    return Column(
+      children: [
+        Padding(padding: EdgeInsets.all(20)),
+        SizedBox(
+          height: 115,
+          width: 115,
+          child: CircleAvatar(
+            backgroundImage: NetworkImage(
+                "https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2022/01/21/992560672.png"),
           ),
-          textAlign: TextAlign.center,
         ),
-      ),
-
-      ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: Colors.blue, // background
-          onPrimary: Colors.white, // foreground
+        Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: Text(
+                'Dadang Dindang',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: Text(
+                '2009017502',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
         ),
-        onPressed: () { },
-        child: Text('Ganti Bahasa'),
-      ),
-
-      TextButton(
-        style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.grey),
+        Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: Table(
+            defaultColumnWidth: IntrinsicColumnWidth(),
+            defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+            children: [
+              buildRow(['Jabatan', ':', 'Ketua Departemen Ilmu Komputer']),
+              buildRow(['Pendidikan', ':', 'S3']),
+              buildRow(['Status Aktivasi', ':', 'Aktif'])
+            ],
+          ),
         ),
-        onPressed: () {},
-        child: Text('Logout'),
-      )
-
-    ],
-  );
+        Padding(
+          padding: const EdgeInsets.only(top: 12),
+          child: TextButton(
+            style: TextButton.styleFrom(
+                primary: Colors.white, backgroundColor: Colors.blue),
+            onPressed: () {},
+            child: Text('Ganti Bahasa'),
+          ),
+        ),
+        TextButton(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.grey),
+          ),
+          onPressed: () {
+            // back to the login page
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginPage()),
+            );
+          },
+          child: Text('Logout'),
+        )
+      ],
+    );
   }
 }
