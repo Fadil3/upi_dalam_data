@@ -65,12 +65,12 @@ class _SettingPageState extends State<SettingPage> {
 
       Table(
         border: TableBorder.all(),
-        defaultColumnWidth: FixedColumnWidth(200),
+        defaultColumnWidth: IntrinsicColumnWidth(),
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
         children: [
-          buildRow(['Jabatan', 'Ketua Departemen Ilmu Komputer']),
-          buildRow(['Pendidikan', 'S3']),
-          buildRow(['Status Aktivasi', 'Aktif'])
+          buildRow(['Jabatan', ':' ,'Ketua Departemen Ilmu Komputer']),
+          buildRow(['Pendidikan', ':', 'S3']),
+          buildRow(['Status Aktivasi', ':', 'Aktif'])
         ],
       ),
 
