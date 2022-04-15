@@ -78,8 +78,9 @@ class _FakultasState extends State<Fakultas> {
                       Navigator.push(
                         context,
                         // bring state to detail fakultas
+                        // hardcode route
                         MaterialPageRoute(
-                            builder: (context) => DetailFakultas(e["name"])),
+                            builder: (context) => DetailFakultas("FPMIPA")),
                       );
                     },
                     child: Container(
