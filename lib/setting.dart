@@ -67,6 +67,9 @@ class _SettingPageState extends State<SettingPage> {
       ),
 
       Table(
+        border: TableBorder.all(),
+        defaultColumnWidth: FixedColumnWidth(200),
+        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
         children: <TableRow>[
           _tableRow
         ],
