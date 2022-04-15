@@ -9,21 +9,18 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
 
+  TableRow buildRow(List<String> cells) => TableRow(
+    children: cells.map((cell){
+      return Padding(
+        padding: EdgeInsets.all(12),
+        child: Text(cell),
+      );
+    }).toList()
+  );
+
   @override
   Widget build(BuildContext context) {
 
-  TableRow _tableRow = TableRow(
-    children: <Widget>[
-      Padding(
-        padding: EdgeInsets.all(10),
-        child: Text('Jabatan'),
-      ),
-      Padding(
-        padding: EdgeInsets.all(10),
-        child: Text('Ketua Departemen Ilmu Komputer'),
-      )
-    ]
-  );
   
   return Column(
     children: [
@@ -70,8 +67,8 @@ class _SettingPageState extends State<SettingPage> {
         border: TableBorder.all(),
         defaultColumnWidth: FixedColumnWidth(200),
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-        children: <TableRow>[
-          _tableRow
+        children: [
+          buildRow(['Jabatan', 'Ketua Departemen Ilmu Komputer'])
         ],
       ),
 
