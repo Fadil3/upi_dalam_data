@@ -75,7 +75,16 @@ class _DosenState extends State<Dosen> {
                             const Padding(
                               padding:
                                   EdgeInsets.all(10), //20 pixel ke semua arah
-                            )
+                            ),
+                            Container(
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      //refresh
+                                    },
+                                    child: const Text('Cari Dosen'),
+                                  ),
+                                  padding: const EdgeInsets.all(20.0),
+                                ),
                           ])),
                         ],
                       )),
