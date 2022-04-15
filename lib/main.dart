@@ -130,7 +130,8 @@ class _LoginPageState extends State<LoginPage> {
                   });
                   return;
                 }
-                Navigator.push(
+                // replace navigation to home page
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const HomePage()),
                 );
