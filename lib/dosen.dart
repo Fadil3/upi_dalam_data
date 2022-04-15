@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import 'package:upi_dalam_data/caridosen.dart';
+import 'package:upi_dalam_data/dosen_chart.dart';
 import 'package:upi_dalam_data/pengabdian_chart.dart';
 import 'package:upi_dalam_data/pengajaran_chart.dart';
 import 'package:upi_dalam_data/pelatihan_chart.dart';
@@ -77,14 +79,19 @@ class _DosenState extends State<Dosen> {
                                   EdgeInsets.all(10), //20 pixel ke semua arah
                             ),
                             Container(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      //refresh
-                                    },
-                                    child: const Text('Cari Dosen'),
-                                  ),
-                                  padding: const EdgeInsets.all(20.0),
-                                ),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // route to cari dosen
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => CariDosen()),
+                                  );
+                                },
+                                child: const Text('Cari Dosen'),
+                              ),
+                              padding: const EdgeInsets.all(20.0),
+                            ),
                           ])),
                         ],
                       )),
@@ -170,7 +177,11 @@ class _DosenState extends State<Dosen> {
                                 Container(
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      //refresh
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => DosenChart()),
+                                      );
                                     },
                                     child: const Text('Lihat Detail'),
                                   ),
