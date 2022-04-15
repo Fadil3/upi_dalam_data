@@ -183,6 +183,27 @@ class _DetailFakultasState extends State<DetailFakultas> {
                 }).toList(),
               ),
             ),
+            const Padding(padding: EdgeInsets.all(5)),
+            const Text(
+              "Program Studi",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(5)),
+            ...data["prodi"].map((prodi) {
+              return Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Card(
+                  child: ListTile(
+                    title: Text(prodi["name"]),
+                    subtitle: Text(prodi["jenjang"]),
+                    trailing: Text("Akreditasi : ${prodi["akreditasi"]}"),
+                  ),
+                ),
+              );
+            }).toList(),
           ],
         ),
       ))),
