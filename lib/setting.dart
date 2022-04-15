@@ -11,6 +11,20 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
+
+  TableRow _tableRow = TableRow(
+    children: <Widget>[
+      Padding(
+        padding: EdgeInsets.all(10),
+        child: Text('Jabatan'),
+      ),
+      Padding(
+        padding: EdgeInsets.all(10),
+        child: Text('Ketua Departemen Ilmu Komputer'),
+      )
+    ]
+  );
+  
   return Column(
     children: [
 
@@ -49,6 +63,12 @@ class _SettingPageState extends State<SettingPage> {
                 textAlign: TextAlign.center,
               ),
             ),
+        ],
+      ),
+
+      Table(
+        children: <TableRow>[
+          _tableRow
         ],
       ),
 
