@@ -40,6 +40,33 @@ final List<Entry> data = <Entry>[
       Entry('Wakil Rektor\nEmail:wakil.retor12@upi.edu'),
     ],
   ),
+  // Second Row
+  Entry('Fakultas', <Entry>[
+    Entry('FPMIPA'),
+    Entry('FIP'),
+    Entry('FPIPS'),
+    Entry('FPBS'),
+    Entry('FPTK'),
+    Entry('FPOK'),
+    Entry('FPEB'),
+    Entry('FPSD'),
+  ]),
+  // Entry(
+  //   'Chapter C',
+  //   <Entry>[
+  //     Entry('Section C0'),
+  //     Entry('Section C1'),
+  //     Entry(
+  //       'Section C2',
+  //       <Entry>[
+  //         Entry('Item C2.0'),
+  //         Entry('Item C2.1'),
+  //         Entry('Item C2.2'),
+  //         Entry('Item C2.3'),
+  //       ],
+  //     )
+  //   ],
+  // ),
 ];
 
 // Create the Widget for the row
