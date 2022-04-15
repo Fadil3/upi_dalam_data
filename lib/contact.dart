@@ -52,23 +52,59 @@ final List<Entry> data = <Entry>[
           Entry(
             '   Departemen',
             <Entry>[
-              Entry('     Pendidikan Ilmu Komputer'),
-              Entry('     Pendidika Kimia'),
-              Entry('     Pendidika Biologi'),
-              Entry('     Pendidika Fisika'),
-              Entry('     Pendidika Matematika'),
-              Entry('     IPSE')
+              Entry(
+                '     Pendidikan Ilmu Komputer',
+                <Entry>[
+                  Entry('       Ketua Prodi Ilmu Komputer\n       ilmukomputer@upi.edu\n       08746028617'),
+                  Entry('       Ketua Prodi Pendidikan Ilmu Komputer\n       pendidikanilmukomputer@upi.edu\n       08113927661')
+                ]
+              ),
+              
+              Entry(
+                '     Pendidika Kimia',
+                <Entry>[
+                  Entry('       Ketua Prodi Kimia\n       kimia@upi.edu\n       08746028617'),
+                  Entry('       Ketua Prodi Pendidikan Kimia\n       pendidikankimia@upi.edu\n       08113927661')
+                ]
+              ),
+              Entry(
+                '     Pendidika Biologi',
+                <Entry>[
+                  Entry('       Ketua Prodi Biolgi\n       biolgi@upi.edu\n       08746028617'),
+                  Entry('       Ketua Prodi Pendidikan Biolgi\n       pendidikanbiolgi@upi.edu\n       08113927661')
+                ]
+              ),
+              Entry(
+                '     Pendidika Fisika',
+                <Entry>[
+                  Entry('       Ketua Prodi Fisika\n       fisika@upi.edu\n       08746028617'),
+                  Entry('       Ketua Prodi Pendidikan Fisika\n       pendidikanfisika@upi.edu\n       08113927661')
+                  ]
+              ),
+              Entry(
+                '     Pendidika Matematika',
+                <Entry>[
+                  Entry('       Ketua Prodi Matematika\n       matematika@upi.edu\n       08746028617'),
+                  Entry('       Ketua Prodi Pendidikan Matematika\n       pendidikanmatematika@upi.edu\n       08113927661')
+                ]
+              ),
+              Entry(
+                '     IPSE',
+                <Entry>[
+                  Entry('       Ketua Prodi IPSE\n       IPSE@upi.edu\n       08746028617'),
+                ]
+              )
             ],
           ),
         ],
       ),
-      Entry('FIP'),
-      Entry('FPIPS'),
-      Entry('FPBS'),
-      Entry('FPTK'),
-      Entry('FPOK'),
-      Entry('FPEB'),
-      Entry('FPSD'),
+      Entry(' FIP'),
+      Entry(' FPIPS'),
+      Entry(' FPBS'),
+      Entry(' FPTK'),
+      Entry(' FPOK'),
+      Entry(' FPEB'),
+      Entry(' FPSD'),
   ]),
   // Entry(
   //   'Chapter C',
