@@ -20,7 +20,17 @@ class MyAppState extends State<MyApp> {
     '↓ Nama',
     '↑ Jabatan',
     '↓ Jabatan',
+    '↑ Pangkat',
+    '↓ Pangkat',
   ];
+
+  TableRow buildRow(List<String> cells) => TableRow(
+          children: cells.map((cell) {
+        return Padding(
+          padding: EdgeInsets.all(30),
+          child: Text(cell),
+        );
+      }).toList());
 
   @override
   void dispose() {
@@ -95,6 +105,43 @@ class MyAppState extends State<MyApp> {
               ),
             ],
           ),
+          Container(
+            child: Column(children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                            width: 480,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Card(
+                                      child: Table(
+                                        defaultColumnWidth:
+                                            IntrinsicColumnWidth(),
+                                        defaultVerticalAlignment:
+                                            TableCellVerticalAlignment.middle,
+                                        children: [
+                                          buildRow([
+                                            'Al Tair MT',
+                                            'Guru Besar',
+                                            'PU',
+                                          ]),
+                                        ],
+                                      ),
+                                    )),
+                              ],
+                            )),
+                      ])
+                ],
+              )
+            ]),
+          )
         ]), //column center
       ), //Scaffold
     ); //Material APP
