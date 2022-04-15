@@ -32,14 +32,22 @@ class _MahasiswaState extends State<Mahasiswa> {
                   elevation: 2,
                   child: Column(
                     children: const [
-                      Text("Jumlah Mahasiswa Universitas Pendidikan Indonesia",
-                          textAlign: TextAlign.center),
-                      Text(
-                        '41.633',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: ListTile(
+                          title: Text(
+                              "Jumlah Mahasiswa Universitas Pendidikan Indonesia",
+                              textAlign: TextAlign.center),
+                          subtitle: Text(
+                            '41.633',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
