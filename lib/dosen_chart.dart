@@ -49,6 +49,8 @@ class _DosenChartState extends State<DosenChart> {
                       dataSource: _AstData,
                       xValueMapper: (AstData dosen, _) => dosen.a,
                       yValueMapper: (AstData dosen, _) => dosen.b,
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      color: Color.fromRGBO(255, 140, 50, 1),
                       dataLabelSettings: DataLabelSettings(
                         isVisible: true,
                       ))
@@ -69,6 +71,8 @@ class _DosenChartState extends State<DosenChart> {
                       dataSource: _LektorData,
                       xValueMapper: (LekData dosen, _) => dosen.a,
                       yValueMapper: (LekData dosen, _) => dosen.b,
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      color: Color.fromRGBO(100, 111, 212, 1),
                       dataLabelSettings: DataLabelSettings(
                         isVisible: true,
                       ))
@@ -89,6 +93,8 @@ class _DosenChartState extends State<DosenChart> {
                       dataSource: _KepLekData,
                       xValueMapper: (KepLekData dosen, _) => dosen.a,
                       yValueMapper: (KepLekData dosen, _) => dosen.b,
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      color: Color.fromRGBO(20, 195, 142, 1),
                       dataLabelSettings: DataLabelSettings(
                         isVisible: true,
                       ))
@@ -109,6 +115,8 @@ class _DosenChartState extends State<DosenChart> {
                       dataSource: _ProfData,
                       xValueMapper: (ProfData dosen, _) => dosen.a,
                       yValueMapper: (ProfData dosen, _) => dosen.b,
+                      color: Color.fromRGBO(75, 123, 229, 1),
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
                       dataLabelSettings: DataLabelSettings(
                         isVisible: true,
                       ))
@@ -133,8 +141,8 @@ class _DosenChartState extends State<DosenChart> {
 
   List<LekData> getColumnDataLektor() {
     List<LekData> columnData = <LekData>[
-      LekData('III/C', 25),
-      LekData('III/D', 30),
+      LekData('III/C', 18),
+      LekData('III/D', 26),
     ];
     return columnData;
   }
