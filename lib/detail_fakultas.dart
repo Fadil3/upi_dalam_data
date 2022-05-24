@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 var informationTextStyle = const TextStyle(fontFamily: 'Oxygen');
 
@@ -181,6 +182,14 @@ class _DetailFakultasState extends State<DetailFakultas> {
                     ),
                   );
                 }).toList(),
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(5)),
+            const Text(
+              "Statistik Fakultas",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
             const Padding(padding: EdgeInsets.all(5)),
