@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:upi_dalam_data/detaildosen.dart';
 
 void main() {
   runApp(const CariDosen());
@@ -14,15 +15,9 @@ class CariDosen extends StatefulWidget {
 
 class CariDosenState extends State<CariDosen> {
   final textEditController = TextEditingController();
-  String dropdownvalue = '↑ Nama';
-  var items = [
-    '↑ Nama',
-    '↓ Nama',
-    '↑ Jabatan',
-    '↓ Jabatan',
-    '↑ Golongan',
-    '↓ Golongan',
-  ];
+  String _nama = "";
+  String pilihanSalam = "DAA";
+  String pilihanSalamOut = "";
 
   TableRow buildRow(List<String> cells) => TableRow(
           children: cells.map((cell) {
@@ -41,9 +36,41 @@ class CariDosenState extends State<CariDosen> {
 
   @override
   Widget build(BuildContext context) {
+    List<DropdownMenuItem<String>> salam = [];
+    var itm1 = const DropdownMenuItem<String>(
+      value: "DAA",
+      child: Text("Nama A-Z"),
+    );
+    var itm2 = const DropdownMenuItem<String>(
+      value: "DAB",
+      child: Text("Nama Z-A"),
+    );
+    var itm3 = const DropdownMenuItem<String>(
+      value: "Golting",
+      child: Text("Golongan Tertinggi"),
+    );
+    var itm4 = const DropdownMenuItem<String>(
+      value: "Golren",
+      child: Text("Golongan Terendah"),
+    );
+    var itm5 = const DropdownMenuItem<String>(
+      value: "Jabting",
+      child: Text("Jabatan Teringgi"),
+    );
+    var itm6 = const DropdownMenuItem<String>(
+      value: "Jabren",
+      child: Text("Jabatan Terendah"),
+    );
+    salam.add(itm1);
+    salam.add(itm2);
+    salam.add(itm5);
+    salam.add(itm6);
+    salam.add(itm3);
+    salam.add(itm4);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Fakultas"),
+        title: const Text("Cari Dosen"),
       ),
       body: ListView(children: [
         Column(
@@ -62,28 +89,39 @@ class CariDosenState extends State<CariDosen> {
                       ),
                     ),
                   ),
-                  Text(
-                    'Urutkan berdasarkan:',
-                    style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 32, 30, 30)),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      'Urutkan berdasarkan:',
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 32, 30, 30)),
+                    ),
                   ),
                   DropdownButton(
-                    // Initial Value
-                    value: dropdownvalue,
-
-                    // Down Arrow Icon
-                    icon: const Icon(Icons.keyboard_arrow_down),
-
-                    // Array list of items
-                    items: items.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Text(items),
-                      );
-                    }).toList(),
-                    onChanged: (String? value) {},
+                    value: pilihanSalam,
+                    items: salam,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        if (newValue != null) {
+                          pilihanSalam = newValue;
+                        }
+                      });
+                    },
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(10), //20 pixel ke semua arah
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _nama = textEditController
+                              .text; //akses text via controller
+                          pilihanSalamOut = pilihanSalam;
+                        }); //refresh
+                      },
+                      child: const Text('Urutkan'),
+                    ),
                   ),
                 ],
               ),
@@ -105,10 +143,6 @@ class CariDosenState extends State<CariDosen> {
                             padding: EdgeInsets.all(10),
                             child: Card(
                                 child: Column(children: [
-                              const Padding(
-                                padding:
-                                    EdgeInsets.all(10), //20 pixel ke semua arah
-                              ),
                               const Padding(
                                 padding:
                                     EdgeInsets.all(10), //20 pixel ke semua arah
@@ -144,7 +178,13 @@ class CariDosenState extends State<CariDosen> {
                                   DataCell(Text('IV/d')),
                                   DataCell(TextButton(
                                       onPressed: () {
-                                        // aksi jika ditap
+                                        // route to cari dosen
+                                        /* Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailDosen()),
+                                        ); */
                                       },
                                       child: const Text('Lihat')))
                                 ]),
