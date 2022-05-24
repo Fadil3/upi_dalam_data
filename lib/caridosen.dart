@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:upi_dalam_data/detaildosen.dart';
+import 'package:upi_dalam_data/detail_dosen.dart';
 
 void main() {
   runApp(const CariDosen());
@@ -178,13 +178,13 @@ class CariDosenState extends State<CariDosen> {
                                   DataCell(Text('IV/d')),
                                   DataCell(TextButton(
                                       onPressed: () {
-                                        // route to cari dosen
-                                        /* Navigator.push(
+                                        // route to detail dosen
+                                        Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   DetailDosen()),
-                                        ); */
+                                        );
                                       },
                                       child: const Text('Lihat')))
                                 ]),
