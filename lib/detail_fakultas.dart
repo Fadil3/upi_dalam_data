@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 var informationTextStyle = const TextStyle(fontFamily: 'Oxygen');
 
@@ -79,6 +80,54 @@ class _DetailFakultasState extends State<DetailFakultas> {
     {"name": "FPOK", "url_image": "images/fakultas/FPOK.jpg"},
     {"name": "FPEB", "url_image": "images/fakultas/FPEB.jpeg"},
   ];
+  List<_ChartKeketatan>? chartKeketatan;
+  List<_ChartJabatanFungsional>? chartJabatanFungsional;
+  List<_ChartPendidikan>? chartPendidikan;
+  List<_ChartGender>? chartGender;
+
+  TooltipBehavior? _tooltipBehavior;
+
+  @override
+  void initState() {
+    _tooltipBehavior =
+        TooltipBehavior(enable: true, header: '', canShowMarker: false);
+    chartJabatanFungsional = <_ChartJabatanFungsional>[
+      _ChartJabatanFungsional(
+        '2020',
+        4,
+        8,
+        12,
+        22,
+        5,
+      ),
+      _ChartJabatanFungsional(
+        '2021',
+        2,
+        20,
+        9,
+        21,
+        10,
+      ),
+    ];
+    chartKeketatan = <_ChartKeketatan>[
+      _ChartKeketatan(2017, 18, 17, 7),
+      _ChartKeketatan(2018, 29, 29, 11),
+      _ChartKeketatan(2019, 18, 17, 7),
+      _ChartKeketatan(2020, 18, 11, 7),
+      _ChartKeketatan(2021, 20, 12, 8),
+      _ChartKeketatan(2022, 18, 10, 4),
+    ];
+    chartPendidikan = <_ChartPendidikan>[
+      _ChartPendidikan("2021", 53, 47),
+      _ChartPendidikan("2022", 41, 59),
+    ];
+    chartGender = <_ChartGender>[
+      _ChartGender("2021", 38, 62),
+      _ChartGender("2022", 40, 60),
+    ];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Map data = infoFakultas
@@ -185,6 +234,66 @@ class _DetailFakultasState extends State<DetailFakultas> {
             ),
             const Padding(padding: EdgeInsets.all(5)),
             const Text(
+              "Statistik Fakultas",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SfCartesianChart(
+              plotAreaBorderWidth: 0,
+              title: ChartTitle(text: 'Keketatan Penerimaan Mahasiswa'),
+              legend: Legend(
+                  isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
+              primaryXAxis: NumericAxis(
+                  edgeLabelPlacement: EdgeLabelPlacement.shift,
+                  interval: 2,
+                  majorGridLines: const MajorGridLines(width: 0)),
+              primaryYAxis: NumericAxis(
+                  labelFormat: '{value}',
+                  axisLine: const AxisLine(width: 0),
+                  majorTickLines:
+                      const MajorTickLines(color: Colors.transparent)),
+              series: _getDefaultLineSeries(),
+              tooltipBehavior: TooltipBehavior(enable: true),
+            ),
+            SfCartesianChart(
+              plotAreaBorderWidth: 1,
+              title: ChartTitle(
+                  text: 'Rasio Dosen Berdasarkan Jabatan Fungsional'),
+              legend: Legend(
+                  isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
+              primaryXAxis: CategoryAxis(
+                majorGridLines: const MajorGridLines(width: 0),
+              ),
+              series: _getStackedColumnSeries(),
+              tooltipBehavior: _tooltipBehavior,
+            ),
+            SfCartesianChart(
+              plotAreaBorderWidth: 1,
+              title: ChartTitle(
+                  text: 'Rasio Dosen Berdasarkan Jenjang Pendidikan Terakhir'),
+              legend: Legend(
+                  isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
+              primaryXAxis: CategoryAxis(
+                majorGridLines: const MajorGridLines(width: 0),
+              ),
+              series: _getStackedColumnSeriesPendidikan(),
+              tooltipBehavior: _tooltipBehavior,
+            ),
+            SfCartesianChart(
+              plotAreaBorderWidth: 1,
+              title: ChartTitle(text: 'Rasio Dosen Berdasarkan Gender'),
+              legend: Legend(
+                  isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
+              primaryXAxis: CategoryAxis(
+                majorGridLines: const MajorGridLines(width: 0),
+              ),
+              series: _getStackedColumnSeriesGender(),
+              tooltipBehavior: _tooltipBehavior,
+            ),
+            const Padding(padding: EdgeInsets.all(5)),
+            const Text(
               "Program Studi",
               style: TextStyle(
                 fontSize: 20,
@@ -209,4 +318,130 @@ class _DetailFakultasState extends State<DetailFakultas> {
       ))),
     );
   }
+
+  /// The method returns line series to chart.
+  List<LineSeries<_ChartKeketatan, num>> _getDefaultLineSeries() {
+    return <LineSeries<_ChartKeketatan, num>>[
+      LineSeries<_ChartKeketatan, num>(
+          animationDuration: 2500,
+          dataSource: chartKeketatan!,
+          xValueMapper: (_ChartKeketatan data, _) => data.x,
+          yValueMapper: (_ChartKeketatan data, _) => data.y,
+          width: 2,
+          name: 'SNMPTN',
+          markerSettings: const MarkerSettings(isVisible: true)),
+      LineSeries<_ChartKeketatan, num>(
+          animationDuration: 2500,
+          dataSource: chartKeketatan!,
+          width: 2,
+          name: 'SBMPTN',
+          xValueMapper: (_ChartKeketatan data, _) => data.x,
+          yValueMapper: (_ChartKeketatan data, _) => data.y2,
+          markerSettings: const MarkerSettings(isVisible: true)),
+      LineSeries<_ChartKeketatan, num>(
+          animationDuration: 2500,
+          dataSource: chartKeketatan!,
+          width: 2,
+          name: 'SMUPI',
+          xValueMapper: (_ChartKeketatan data, _) => data.x,
+          yValueMapper: (_ChartKeketatan data, _) => data.y3,
+          markerSettings: const MarkerSettings(isVisible: true))
+    ];
+  }
+
+  List<StackedColumn100Series<_ChartJabatanFungsional, String>>
+      _getStackedColumnSeries() {
+    return <StackedColumn100Series<_ChartJabatanFungsional, String>>[
+      StackedColumn100Series<_ChartJabatanFungsional, String>(
+          dataSource: chartJabatanFungsional!,
+          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
+          yValueMapper: (_ChartJabatanFungsional data, _) => data.tp,
+          name: 'Tenaga Pengajar'),
+      StackedColumn100Series<_ChartJabatanFungsional, String>(
+          dataSource: chartJabatanFungsional!,
+          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
+          yValueMapper: (_ChartJabatanFungsional data, _) => data.aa,
+          name: 'Asisten Ahli'),
+      StackedColumn100Series<_ChartJabatanFungsional, String>(
+          dataSource: chartJabatanFungsional!,
+          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
+          yValueMapper: (_ChartJabatanFungsional data, _) => data.lk,
+          name: 'Lektor'),
+      StackedColumn100Series<_ChartJabatanFungsional, String>(
+          dataSource: chartJabatanFungsional!,
+          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
+          yValueMapper: (_ChartJabatanFungsional data, _) => data.lkp,
+          name: 'Lektor Kepala'),
+      StackedColumn100Series<_ChartJabatanFungsional, String>(
+          dataSource: chartJabatanFungsional!,
+          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
+          yValueMapper: (_ChartJabatanFungsional data, _) => data.gb,
+          name: 'Guru Besar')
+    ];
+  }
+
+  List<StackedColumn100Series<_ChartPendidikan, String>>
+      _getStackedColumnSeriesPendidikan() {
+    return <StackedColumn100Series<_ChartPendidikan, String>>[
+      StackedColumn100Series<_ChartPendidikan, String>(
+          dataSource: chartPendidikan!,
+          xValueMapper: (_ChartPendidikan data, _) => data.tahun,
+          yValueMapper: (_ChartPendidikan data, _) => data.s2,
+          name: 'S2'),
+      StackedColumn100Series<_ChartPendidikan, String>(
+          dataSource: chartPendidikan!,
+          xValueMapper: (_ChartPendidikan data, _) => data.tahun,
+          yValueMapper: (_ChartPendidikan data, _) => data.s3,
+          name: 'S3'),
+    ];
+  }
+
+  List<StackedColumn100Series<_ChartGender, String>>
+      _getStackedColumnSeriesGender() {
+    return <StackedColumn100Series<_ChartGender, String>>[
+      StackedColumn100Series<_ChartGender, String>(
+          dataSource: chartGender!,
+          xValueMapper: (_ChartGender data, _) => data.tahun,
+          yValueMapper: (_ChartGender data, _) => data.l,
+          name: 'Laki-Laki'),
+      StackedColumn100Series<_ChartGender, String>(
+          dataSource: chartGender!,
+          xValueMapper: (_ChartGender data, _) => data.tahun,
+          yValueMapper: (_ChartGender data, _) => data.p,
+          name: 'Perempuan'),
+    ];
+  }
+}
+
+class _ChartJabatanFungsional {
+  _ChartJabatanFungsional(
+      this.tahun, this.tp, this.aa, this.lk, this.lkp, this.gb);
+  final String tahun;
+  final double tp;
+  final double aa;
+  final double lk;
+  final double lkp;
+  final double gb;
+}
+
+class _ChartKeketatan {
+  _ChartKeketatan(this.x, this.y, this.y2, this.y3);
+  final double x;
+  final double y;
+  final double y2;
+  final double y3;
+}
+
+class _ChartPendidikan {
+  _ChartPendidikan(this.tahun, this.s2, this.s3);
+  final String tahun;
+  final int s2;
+  final int s3;
+}
+
+class _ChartGender {
+  _ChartGender(this.tahun, this.l, this.p);
+  final String tahun;
+  final int l;
+  final int p;
 }
