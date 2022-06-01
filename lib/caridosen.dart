@@ -36,7 +36,7 @@ class CariDosenState extends State<CariDosen> {
 
   @override
   Widget build(BuildContext context) {
-    List<DropdownMenuItem<String>> salam = [];
+    List<DropdownMenuItem<String>> filter = [];
     var itm1 = const DropdownMenuItem<String>(
       value: "DAA",
       child: Text("Nama A-Z"),
@@ -61,12 +61,12 @@ class CariDosenState extends State<CariDosen> {
       value: "Jabren",
       child: Text("Jabatan Terendah"),
     );
-    salam.add(itm1);
-    salam.add(itm2);
-    salam.add(itm5);
-    salam.add(itm6);
-    salam.add(itm3);
-    salam.add(itm4);
+    filter.add(itm1);
+    filter.add(itm2);
+    filter.add(itm5);
+    filter.add(itm6);
+    filter.add(itm3);
+    filter.add(itm4);
 
     return Scaffold(
       appBar: AppBar(
@@ -101,7 +101,7 @@ class CariDosenState extends State<CariDosen> {
                   ),
                   DropdownButton(
                     value: pilihanSalam,
-                    items: salam,
+                    items: filter,
                     onChanged: (String? newValue) {
                       setState(() {
                         if (newValue != null) {
