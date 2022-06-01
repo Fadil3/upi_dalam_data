@@ -82,6 +82,7 @@ class _DetailFakultasState extends State<DetailFakultas> {
   ];
   List<_ChartKeketatan>? chartKeketatan;
   List<_ChartJabatanFungsional>? chartJabatanFungsional;
+  List<_ChartPendidikan>? chartPendidikan;
 
   TooltipBehavior? _tooltipBehavior;
 
@@ -114,6 +115,10 @@ class _DetailFakultasState extends State<DetailFakultas> {
       _ChartKeketatan(2020, 18, 11, 7),
       _ChartKeketatan(2021, 20, 12, 8),
       _ChartKeketatan(2022, 18, 10, 4),
+    ];
+    chartPendidikan = <_ChartPendidikan>[
+      _ChartPendidikan("2021", 53, 47),
+      _ChartPendidikan("2022", 41, 59),
     ];
     super.initState();
   }
@@ -259,6 +264,18 @@ class _DetailFakultasState extends State<DetailFakultas> {
               series: _getStackedColumnSeries(),
               tooltipBehavior: _tooltipBehavior,
             ),
+            SfCartesianChart(
+              plotAreaBorderWidth: 1,
+              title: ChartTitle(
+                  text: 'Rasio Dosen Berdasarkan Jenjang Pendidikan Terakhir'),
+              legend: Legend(
+                  isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
+              primaryXAxis: CategoryAxis(
+                majorGridLines: const MajorGridLines(width: 0),
+              ),
+              series: _getStackedColumnSeriesPendidikan(),
+              tooltipBehavior: _tooltipBehavior,
+            ),
             const Padding(padding: EdgeInsets.all(5)),
             const Text(
               "Program Studi",
@@ -346,6 +363,22 @@ class _DetailFakultasState extends State<DetailFakultas> {
           name: 'Guru Besar')
     ];
   }
+
+  List<StackedColumn100Series<_ChartPendidikan, String>>
+      _getStackedColumnSeriesPendidikan() {
+    return <StackedColumn100Series<_ChartPendidikan, String>>[
+      StackedColumn100Series<_ChartPendidikan, String>(
+          dataSource: chartPendidikan!,
+          xValueMapper: (_ChartPendidikan data, _) => data.tahun,
+          yValueMapper: (_ChartPendidikan data, _) => data.s2,
+          name: 'S2'),
+      StackedColumn100Series<_ChartPendidikan, String>(
+          dataSource: chartPendidikan!,
+          xValueMapper: (_ChartPendidikan data, _) => data.tahun,
+          yValueMapper: (_ChartPendidikan data, _) => data.s3,
+          name: 'S3'),
+    ];
+  }
 }
 
 class _ChartJabatanFungsional {
@@ -365,4 +398,11 @@ class _ChartKeketatan {
   final double y;
   final double y2;
   final double y3;
+}
+
+class _ChartPendidikan {
+  _ChartPendidikan(this.tahun, this.s2, this.s3);
+  final String tahun;
+  final int s2;
+  final int s3;
 }
