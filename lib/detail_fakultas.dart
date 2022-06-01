@@ -80,8 +80,8 @@ class _DetailFakultasState extends State<DetailFakultas> {
     {"name": "FPOK", "url_image": "images/fakultas/FPOK.jpg"},
     {"name": "FPEB", "url_image": "images/fakultas/FPEB.jpeg"},
   ];
-  List<_ChartData>? chartData;
-  List<_ChartSampleData>? chartFungsional;
+  List<_ChartKeketatan>? chartKeketatan;
+  List<_ChartJabatanFungsional>? chartJabatanFungsional;
 
   TooltipBehavior? _tooltipBehavior;
 
@@ -89,8 +89,8 @@ class _DetailFakultasState extends State<DetailFakultas> {
   void initState() {
     _tooltipBehavior =
         TooltipBehavior(enable: true, header: '', canShowMarker: false);
-    chartFungsional = <_ChartSampleData>[
-      _ChartSampleData(
+    chartJabatanFungsional = <_ChartJabatanFungsional>[
+      _ChartJabatanFungsional(
         '2020',
         4,
         8,
@@ -98,7 +98,7 @@ class _DetailFakultasState extends State<DetailFakultas> {
         22,
         5,
       ),
-      _ChartSampleData(
+      _ChartJabatanFungsional(
         '2021',
         2,
         20,
@@ -107,13 +107,13 @@ class _DetailFakultasState extends State<DetailFakultas> {
         10,
       ),
     ];
-    chartData = <_ChartData>[
-      _ChartData(2017, 18, 17, 7),
-      _ChartData(2018, 29, 29, 11),
-      _ChartData(2019, 18, 17, 7),
-      _ChartData(2020, 18, 11, 7),
-      _ChartData(2021, 20, 12, 8),
-      _ChartData(2022, 18, 10, 4),
+    chartKeketatan = <_ChartKeketatan>[
+      _ChartKeketatan(2017, 18, 17, 7),
+      _ChartKeketatan(2018, 29, 29, 11),
+      _ChartKeketatan(2019, 18, 17, 7),
+      _ChartKeketatan(2020, 18, 11, 7),
+      _ChartKeketatan(2021, 20, 12, 8),
+      _ChartKeketatan(2022, 18, 10, 4),
     ];
     super.initState();
   }
@@ -256,7 +256,7 @@ class _DetailFakultasState extends State<DetailFakultas> {
               primaryXAxis: CategoryAxis(
                 majorGridLines: const MajorGridLines(width: 0),
               ),
-              series: _getStackedBar100Series(),
+              series: _getStackedColumnSeries(),
               tooltipBehavior: _tooltipBehavior,
             ),
             const Padding(padding: EdgeInsets.all(5)),
@@ -287,69 +287,70 @@ class _DetailFakultasState extends State<DetailFakultas> {
   }
 
   /// The method returns line series to chart.
-  List<LineSeries<_ChartData, num>> _getDefaultLineSeries() {
-    return <LineSeries<_ChartData, num>>[
-      LineSeries<_ChartData, num>(
+  List<LineSeries<_ChartKeketatan, num>> _getDefaultLineSeries() {
+    return <LineSeries<_ChartKeketatan, num>>[
+      LineSeries<_ChartKeketatan, num>(
           animationDuration: 2500,
-          dataSource: chartData!,
-          xValueMapper: (_ChartData sales, _) => sales.x,
-          yValueMapper: (_ChartData sales, _) => sales.y,
+          dataSource: chartKeketatan!,
+          xValueMapper: (_ChartKeketatan data, _) => data.x,
+          yValueMapper: (_ChartKeketatan data, _) => data.y,
           width: 2,
           name: 'SNMPTN',
           markerSettings: const MarkerSettings(isVisible: true)),
-      LineSeries<_ChartData, num>(
+      LineSeries<_ChartKeketatan, num>(
           animationDuration: 2500,
-          dataSource: chartData!,
+          dataSource: chartKeketatan!,
           width: 2,
           name: 'SBMPTN',
-          xValueMapper: (_ChartData sales, _) => sales.x,
-          yValueMapper: (_ChartData sales, _) => sales.y2,
+          xValueMapper: (_ChartKeketatan data, _) => data.x,
+          yValueMapper: (_ChartKeketatan data, _) => data.y2,
           markerSettings: const MarkerSettings(isVisible: true)),
-      LineSeries<_ChartData, num>(
+      LineSeries<_ChartKeketatan, num>(
           animationDuration: 2500,
-          dataSource: chartData!,
+          dataSource: chartKeketatan!,
           width: 2,
           name: 'SMUPI',
-          xValueMapper: (_ChartData sales, _) => sales.x,
-          yValueMapper: (_ChartData sales, _) => sales.y3,
+          xValueMapper: (_ChartKeketatan data, _) => data.x,
+          yValueMapper: (_ChartKeketatan data, _) => data.y3,
           markerSettings: const MarkerSettings(isVisible: true))
     ];
   }
 
-  List<StackedBar100Series<_ChartSampleData, String>>
-      _getStackedBar100Series() {
-    return <StackedBar100Series<_ChartSampleData, String>>[
-      StackedBar100Series<_ChartSampleData, String>(
-          dataSource: chartFungsional!,
-          xValueMapper: (_ChartSampleData data, _) => data.tahun,
-          yValueMapper: (_ChartSampleData data, _) => data.tp,
+  List<StackedColumn100Series<_ChartJabatanFungsional, String>>
+      _getStackedColumnSeries() {
+    return <StackedColumn100Series<_ChartJabatanFungsional, String>>[
+      StackedColumn100Series<_ChartJabatanFungsional, String>(
+          dataSource: chartJabatanFungsional!,
+          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
+          yValueMapper: (_ChartJabatanFungsional data, _) => data.tp,
           name: 'Tenaga Pengajar'),
-      StackedBar100Series<_ChartSampleData, String>(
-          dataSource: chartFungsional!,
-          xValueMapper: (_ChartSampleData data, _) => data.tahun,
-          yValueMapper: (_ChartSampleData data, _) => data.aa,
+      StackedColumn100Series<_ChartJabatanFungsional, String>(
+          dataSource: chartJabatanFungsional!,
+          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
+          yValueMapper: (_ChartJabatanFungsional data, _) => data.aa,
           name: 'Asisten Ahli'),
-      StackedBar100Series<_ChartSampleData, String>(
-          dataSource: chartFungsional!,
-          xValueMapper: (_ChartSampleData data, _) => data.tahun,
-          yValueMapper: (_ChartSampleData data, _) => data.lk,
+      StackedColumn100Series<_ChartJabatanFungsional, String>(
+          dataSource: chartJabatanFungsional!,
+          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
+          yValueMapper: (_ChartJabatanFungsional data, _) => data.lk,
           name: 'Lektor'),
-      StackedBar100Series<_ChartSampleData, String>(
-          dataSource: chartFungsional!,
-          xValueMapper: (_ChartSampleData data, _) => data.tahun,
-          yValueMapper: (_ChartSampleData data, _) => data.lkp,
+      StackedColumn100Series<_ChartJabatanFungsional, String>(
+          dataSource: chartJabatanFungsional!,
+          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
+          yValueMapper: (_ChartJabatanFungsional data, _) => data.lkp,
           name: 'Lektor Kepala'),
-      StackedBar100Series<_ChartSampleData, String>(
-          dataSource: chartFungsional!,
-          xValueMapper: (_ChartSampleData data, _) => data.tahun,
-          yValueMapper: (_ChartSampleData data, _) => data.gb,
+      StackedColumn100Series<_ChartJabatanFungsional, String>(
+          dataSource: chartJabatanFungsional!,
+          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
+          yValueMapper: (_ChartJabatanFungsional data, _) => data.gb,
           name: 'Guru Besar')
     ];
   }
 }
 
-class _ChartSampleData {
-  _ChartSampleData(this.tahun, this.tp, this.aa, this.lk, this.lkp, this.gb);
+class _ChartJabatanFungsional {
+  _ChartJabatanFungsional(
+      this.tahun, this.tp, this.aa, this.lk, this.lkp, this.gb);
   final String tahun;
   final double tp;
   final double aa;
@@ -358,8 +359,8 @@ class _ChartSampleData {
   final double gb;
 }
 
-class _ChartData {
-  _ChartData(this.x, this.y, this.y2, this.y3);
+class _ChartKeketatan {
+  _ChartKeketatan(this.x, this.y, this.y2, this.y3);
   final double x;
   final double y;
   final double y2;
