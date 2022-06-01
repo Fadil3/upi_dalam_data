@@ -83,6 +83,7 @@ class _DetailFakultasState extends State<DetailFakultas> {
   List<_ChartKeketatan>? chartKeketatan;
   List<_ChartJabatanFungsional>? chartJabatanFungsional;
   List<_ChartPendidikan>? chartPendidikan;
+  List<_ChartGender>? chartGender;
 
   TooltipBehavior? _tooltipBehavior;
 
@@ -119,6 +120,10 @@ class _DetailFakultasState extends State<DetailFakultas> {
     chartPendidikan = <_ChartPendidikan>[
       _ChartPendidikan("2021", 53, 47),
       _ChartPendidikan("2022", 41, 59),
+    ];
+    chartGender = <_ChartGender>[
+      _ChartGender("2021", 38, 62),
+      _ChartGender("2022", 40, 60),
     ];
     super.initState();
   }
@@ -276,6 +281,17 @@ class _DetailFakultasState extends State<DetailFakultas> {
               series: _getStackedColumnSeriesPendidikan(),
               tooltipBehavior: _tooltipBehavior,
             ),
+            SfCartesianChart(
+              plotAreaBorderWidth: 1,
+              title: ChartTitle(text: 'Rasio Dosen Berdasarkan Gender'),
+              legend: Legend(
+                  isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
+              primaryXAxis: CategoryAxis(
+                majorGridLines: const MajorGridLines(width: 0),
+              ),
+              series: _getStackedColumnSeriesGender(),
+              tooltipBehavior: _tooltipBehavior,
+            ),
             const Padding(padding: EdgeInsets.all(5)),
             const Text(
               "Program Studi",
@@ -379,6 +395,22 @@ class _DetailFakultasState extends State<DetailFakultas> {
           name: 'S3'),
     ];
   }
+
+  List<StackedColumn100Series<_ChartGender, String>>
+      _getStackedColumnSeriesGender() {
+    return <StackedColumn100Series<_ChartGender, String>>[
+      StackedColumn100Series<_ChartGender, String>(
+          dataSource: chartGender!,
+          xValueMapper: (_ChartGender data, _) => data.tahun,
+          yValueMapper: (_ChartGender data, _) => data.l,
+          name: 'Laki-Laki'),
+      StackedColumn100Series<_ChartGender, String>(
+          dataSource: chartGender!,
+          xValueMapper: (_ChartGender data, _) => data.tahun,
+          yValueMapper: (_ChartGender data, _) => data.p,
+          name: 'Perempuan'),
+    ];
+  }
 }
 
 class _ChartJabatanFungsional {
@@ -405,4 +437,11 @@ class _ChartPendidikan {
   final String tahun;
   final int s2;
   final int s3;
+}
+
+class _ChartGender {
+  _ChartGender(this.tahun, this.l, this.p);
+  final String tahun;
+  final int l;
+  final int p;
 }
