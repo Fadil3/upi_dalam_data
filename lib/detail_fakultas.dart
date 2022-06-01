@@ -81,9 +81,32 @@ class _DetailFakultasState extends State<DetailFakultas> {
     {"name": "FPEB", "url_image": "images/fakultas/FPEB.jpeg"},
   ];
   List<_ChartData>? chartData;
+  List<_ChartSampleData>? chartFungsional;
+
+  TooltipBehavior? _tooltipBehavior;
 
   @override
   void initState() {
+    _tooltipBehavior =
+        TooltipBehavior(enable: true, header: '', canShowMarker: false);
+    chartFungsional = <_ChartSampleData>[
+      _ChartSampleData(
+        '2020',
+        4,
+        8,
+        12,
+        22,
+        5,
+      ),
+      _ChartSampleData(
+        '2021',
+        2,
+        20,
+        9,
+        21,
+        10,
+      ),
+    ];
     chartData = <_ChartData>[
       _ChartData(2017, 18, 17, 7),
       _ChartData(2018, 29, 29, 11),
@@ -224,6 +247,18 @@ class _DetailFakultasState extends State<DetailFakultas> {
               series: _getDefaultLineSeries(),
               tooltipBehavior: TooltipBehavior(enable: true),
             ),
+            SfCartesianChart(
+              plotAreaBorderWidth: 1,
+              title: ChartTitle(
+                  text: 'Rasio Dosen Berdasarkan Jabatan Fungsional'),
+              legend: Legend(
+                  isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
+              primaryXAxis: CategoryAxis(
+                majorGridLines: const MajorGridLines(width: 0),
+              ),
+              series: _getStackedBar100Series(),
+              tooltipBehavior: _tooltipBehavior,
+            ),
             const Padding(padding: EdgeInsets.all(5)),
             const Text(
               "Program Studi",
@@ -280,6 +315,47 @@ class _DetailFakultasState extends State<DetailFakultas> {
           markerSettings: const MarkerSettings(isVisible: true))
     ];
   }
+
+  List<StackedBar100Series<_ChartSampleData, String>>
+      _getStackedBar100Series() {
+    return <StackedBar100Series<_ChartSampleData, String>>[
+      StackedBar100Series<_ChartSampleData, String>(
+          dataSource: chartFungsional!,
+          xValueMapper: (_ChartSampleData data, _) => data.tahun,
+          yValueMapper: (_ChartSampleData data, _) => data.tp,
+          name: 'Tenaga Pengajar'),
+      StackedBar100Series<_ChartSampleData, String>(
+          dataSource: chartFungsional!,
+          xValueMapper: (_ChartSampleData data, _) => data.tahun,
+          yValueMapper: (_ChartSampleData data, _) => data.aa,
+          name: 'Asisten Ahli'),
+      StackedBar100Series<_ChartSampleData, String>(
+          dataSource: chartFungsional!,
+          xValueMapper: (_ChartSampleData data, _) => data.tahun,
+          yValueMapper: (_ChartSampleData data, _) => data.lk,
+          name: 'Lektor'),
+      StackedBar100Series<_ChartSampleData, String>(
+          dataSource: chartFungsional!,
+          xValueMapper: (_ChartSampleData data, _) => data.tahun,
+          yValueMapper: (_ChartSampleData data, _) => data.lkp,
+          name: 'Lektor Kepala'),
+      StackedBar100Series<_ChartSampleData, String>(
+          dataSource: chartFungsional!,
+          xValueMapper: (_ChartSampleData data, _) => data.tahun,
+          yValueMapper: (_ChartSampleData data, _) => data.gb,
+          name: 'Guru Besar')
+    ];
+  }
+}
+
+class _ChartSampleData {
+  _ChartSampleData(this.tahun, this.tp, this.aa, this.lk, this.lkp, this.gb);
+  final String tahun;
+  final double tp;
+  final double aa;
+  final double lk;
+  final double lkp;
+  final double gb;
 }
 
 class _ChartData {
