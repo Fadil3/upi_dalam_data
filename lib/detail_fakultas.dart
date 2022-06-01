@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:upi_dalam_data/detail_prodi.dart';
 
 var informationTextStyle = const TextStyle(fontFamily: 'Oxygen');
 
@@ -304,13 +305,24 @@ class _DetailFakultasState extends State<DetailFakultas> {
             ...data["prodi"].map((prodi) {
               return Padding(
                 padding: const EdgeInsets.all(2.0),
-                child: Card(
-                  child: ListTile(
-                    title: Text(prodi["name"]),
-                    subtitle: Text(prodi["jenjang"]),
-                    trailing: Text("Akreditasi : ${prodi["akreditasi"]}"),
-                  ),
-                ),
+                child: InkWell(
+                    splashColor: Colors.blue.withAlpha(30),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        // bring state to detail prodi
+                        // hardcode route
+                        MaterialPageRoute(
+                            builder: (context) => DetailProdi(prodi["slug"])),
+                      );
+                    },
+                    child: Card(
+                      child: ListTile(
+                        title: Text(prodi["name"]),
+                        subtitle: Text(prodi["jenjang"]),
+                        trailing: Text("Akreditasi : ${prodi["akreditasi"]}"),
+                      ),
+                    )),
               );
             }).toList(),
           ],
