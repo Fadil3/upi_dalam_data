@@ -4,9 +4,42 @@ import 'package:upi_dalam_data/detail_prodi.dart';
 
 var informationTextStyle = const TextStyle(fontFamily: 'Oxygen');
 
+class IsiDataFakultas {
+  String slug;
+  String name;
+  String url_image;
+  IsiDataFakultas(
+      {required this.name, required this.slug, required this.url_image});
+}
+
+class DataFakultas {
+  List<IsiDataFakultas> ListPop = <IsiDataFakultas>[];
+
+  DataFakultas(Map<String, dynamic> json) {
+    // isi listPop disini
+    var data = json["data"]["fakultas"];
+    // print(data);
+    for (var val in data) {
+      var slug = val["slug"];
+      var name = val["name"];
+      var url_image = val["url_image"];
+      ListPop.add(
+          IsiDataFakultas(slug: slug, name: name, url_image: url_image));
+      // print(val);
+    }
+  }
+  //map dari json ke atribut
+  factory DataFakultas.fromJson(Map<String, dynamic> json) {
+    return DataFakultas(json);
+  }
+}
+
 class DetailFakultas extends StatefulWidget {
   final String slug;
-  const DetailFakultas(this.slug, {Key? key,}) : super(key: key);
+  const DetailFakultas(
+    this.slug, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<DetailFakultas> createState() => _DetailFakultasState();
@@ -131,203 +164,205 @@ class _DetailFakultasState extends State<DetailFakultas> {
 
   @override
   Widget build(BuildContext context) {
-    Map data = infoFakultas
-        .firstWhere((fakultas) => fakultas["name"] == widget.slug);
+    // Map data =
+    //     infoFakultas.firstWhere((fakultas) => fakultas["name"] == widget.slug);
     return Scaffold(
       body: SingleChildScrollView(
           child: Center(
-              child: SizedBox(
-        width: 500,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Image.asset(data["url_image"]),
-                SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Colors.grey,
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.arrow_back,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 16.0),
-              child: Text(
-                data["full_name"],
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 20.0,
-                  fontFamily: 'Staatliches',
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      const Icon(Icons.align_horizontal_left_outlined),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        "Rasio ${data["ratio"]}",
-                        style: informationTextStyle,
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      const Icon(Icons.timelapse_outlined),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        "${data["avg_study_time"]} tahun masa studi",
-                        style: informationTextStyle,
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      const Icon(Icons.home_work_sharp),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        "${data["prodi"].length.toString()} Prodi",
-                        style: informationTextStyle,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const Padding(padding: EdgeInsets.all(5)),
-            SizedBox(
-              height: 100,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: data["gallery"].map<Widget>((url) {
-                  return Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(url),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-            const Padding(padding: EdgeInsets.all(5)),
-            const Text(
-              "Statistik Fakultas",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SfCartesianChart(
-              plotAreaBorderWidth: 0,
-              title: ChartTitle(text: 'Keketatan Penerimaan Mahasiswa'),
-              legend: Legend(
-                  isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
-              primaryXAxis: NumericAxis(
-                  edgeLabelPlacement: EdgeLabelPlacement.shift,
-                  interval: 2,
-                  majorGridLines: const MajorGridLines(width: 0)),
-              primaryYAxis: NumericAxis(
-                  labelFormat: '{value}',
-                  axisLine: const AxisLine(width: 0),
-                  majorTickLines:
-                      const MajorTickLines(color: Colors.transparent)),
-              series: _getDefaultLineSeries(),
-              tooltipBehavior: TooltipBehavior(enable: true),
-            ),
-            SfCartesianChart(
-              plotAreaBorderWidth: 1,
-              title: ChartTitle(
-                  text: 'Rasio Dosen Berdasarkan Jabatan Fungsional'),
-              legend: Legend(
-                  isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
-              primaryXAxis: CategoryAxis(
-                majorGridLines: const MajorGridLines(width: 0),
-              ),
-              series: _getStackedColumnSeries(),
-              tooltipBehavior: _tooltipBehavior,
-            ),
-            SfCartesianChart(
-              plotAreaBorderWidth: 1,
-              title: ChartTitle(
-                  text: 'Rasio Dosen Berdasarkan Jenjang Pendidikan Terakhir'),
-              legend: Legend(
-                  isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
-              primaryXAxis: CategoryAxis(
-                majorGridLines: const MajorGridLines(width: 0),
-              ),
-              series: _getStackedColumnSeriesPendidikan(),
-              tooltipBehavior: _tooltipBehavior,
-            ),
-            SfCartesianChart(
-              plotAreaBorderWidth: 1,
-              title: ChartTitle(text: 'Rasio Dosen Berdasarkan Gender'),
-              legend: Legend(
-                  isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
-              primaryXAxis: CategoryAxis(
-                majorGridLines: const MajorGridLines(width: 0),
-              ),
-              series: _getStackedColumnSeriesGender(),
-              tooltipBehavior: _tooltipBehavior,
-            ),
-            const Padding(padding: EdgeInsets.all(5)),
-            const Text(
-              "Program Studi",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const Padding(padding: EdgeInsets.all(5)),
-            ...data["prodi"].map((prodi) {
-              return Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: InkWell(
-                    splashColor: Colors.blue.withAlpha(30),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        // bring state to detail prodi
-                        // hardcode route
-                        MaterialPageRoute(
-                            builder: (context) => DetailProdi(prodi["slug"])),
-                      );
-                    },
-                    child: Card(
-                      child: ListTile(
-                        title: Text(prodi["name"]),
-                        subtitle: Text(prodi["jenjang"]),
-                        trailing: Text("Akreditasi : ${prodi["akreditasi"]}"),
-                      ),
-                    )),
-              );
-            }).toList(),
-          ],
-        ),
-      ))),
+        child: Text(widget.slug),
+        //         child: SizedBox(
+        //   width: 500,
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.stretch,
+        //     children: <Widget>[
+        //       Stack(
+        //         children: <Widget>[
+        //           Image.asset(data["url_image"]),
+        //           SafeArea(
+        //             child: Padding(
+        //               padding: const EdgeInsets.all(8.0),
+        //               child: Row(
+        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //                 children: [
+        //                   CircleAvatar(
+        //                     backgroundColor: Colors.grey,
+        //                     child: IconButton(
+        //                       icon: const Icon(
+        //                         Icons.arrow_back,
+        //                         color: Colors.white,
+        //                       ),
+        //                       onPressed: () {
+        //                         Navigator.pop(context);
+        //                       },
+        //                     ),
+        //                   ),
+        //                 ],
+        //               ),
+        //             ),
+        //           ),
+        //         ],
+        //       ),
+        //       Container(
+        //         margin: const EdgeInsets.only(top: 16.0),
+        //         child: Text(
+        //           data["full_name"],
+        //           textAlign: TextAlign.center,
+        //           style: const TextStyle(
+        //             fontSize: 20.0,
+        //             fontFamily: 'Staatliches',
+        //           ),
+        //         ),
+        //       ),
+        //       Container(
+        //         margin: const EdgeInsets.symmetric(vertical: 16.0),
+        //         child: Row(
+        //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //           children: <Widget>[
+        //             Column(
+        //               children: <Widget>[
+        //                 const Icon(Icons.align_horizontal_left_outlined),
+        //                 const SizedBox(height: 8.0),
+        //                 Text(
+        //                   "Rasio ${data["ratio"]}",
+        //                   style: informationTextStyle,
+        //                 ),
+        //               ],
+        //             ),
+        //             Column(
+        //               children: <Widget>[
+        //                 const Icon(Icons.timelapse_outlined),
+        //                 const SizedBox(height: 8.0),
+        //                 Text(
+        //                   "${data["avg_study_time"]} tahun masa studi",
+        //                   style: informationTextStyle,
+        //                 ),
+        //               ],
+        //             ),
+        //             Column(
+        //               children: <Widget>[
+        //                 const Icon(Icons.home_work_sharp),
+        //                 const SizedBox(height: 8.0),
+        //                 Text(
+        //                   "${data["prodi"].length.toString()} Prodi",
+        //                   style: informationTextStyle,
+        //                 ),
+        //               ],
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //       const Padding(padding: EdgeInsets.all(5)),
+        //       SizedBox(
+        //         height: 100,
+        //         child: ListView(
+        //           scrollDirection: Axis.horizontal,
+        //           children: data["gallery"].map<Widget>((url) {
+        //             return Padding(
+        //               padding: const EdgeInsets.all(4.0),
+        //               child: ClipRRect(
+        //                 borderRadius: BorderRadius.circular(10),
+        //                 child: Image.asset(url),
+        //               ),
+        //             );
+        //           }).toList(),
+        //         ),
+        //       ),
+        //       const Padding(padding: EdgeInsets.all(5)),
+        //       const Text(
+        //         "Statistik Fakultas",
+        //         style: TextStyle(
+        //           fontSize: 20,
+        //           fontWeight: FontWeight.bold,
+        //         ),
+        //       ),
+        //       SfCartesianChart(
+        //         plotAreaBorderWidth: 0,
+        //         title: ChartTitle(text: 'Keketatan Penerimaan Mahasiswa'),
+        //         legend: Legend(
+        //             isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
+        //         primaryXAxis: NumericAxis(
+        //             edgeLabelPlacement: EdgeLabelPlacement.shift,
+        //             interval: 2,
+        //             majorGridLines: const MajorGridLines(width: 0)),
+        //         primaryYAxis: NumericAxis(
+        //             labelFormat: '{value}',
+        //             axisLine: const AxisLine(width: 0),
+        //             majorTickLines:
+        //                 const MajorTickLines(color: Colors.transparent)),
+        //         series: _getDefaultLineSeries(),
+        //         tooltipBehavior: TooltipBehavior(enable: true),
+        //       ),
+        //       SfCartesianChart(
+        //         plotAreaBorderWidth: 1,
+        //         title: ChartTitle(
+        //             text: 'Rasio Dosen Berdasarkan Jabatan Fungsional'),
+        //         legend: Legend(
+        //             isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
+        //         primaryXAxis: CategoryAxis(
+        //           majorGridLines: const MajorGridLines(width: 0),
+        //         ),
+        //         series: _getStackedColumnSeries(),
+        //         tooltipBehavior: _tooltipBehavior,
+        //       ),
+        //       SfCartesianChart(
+        //         plotAreaBorderWidth: 1,
+        //         title: ChartTitle(
+        //             text: 'Rasio Dosen Berdasarkan Jenjang Pendidikan Terakhir'),
+        //         legend: Legend(
+        //             isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
+        //         primaryXAxis: CategoryAxis(
+        //           majorGridLines: const MajorGridLines(width: 0),
+        //         ),
+        //         series: _getStackedColumnSeriesPendidikan(),
+        //         tooltipBehavior: _tooltipBehavior,
+        //       ),
+        //       SfCartesianChart(
+        //         plotAreaBorderWidth: 1,
+        //         title: ChartTitle(text: 'Rasio Dosen Berdasarkan Gender'),
+        //         legend: Legend(
+        //             isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
+        //         primaryXAxis: CategoryAxis(
+        //           majorGridLines: const MajorGridLines(width: 0),
+        //         ),
+        //         series: _getStackedColumnSeriesGender(),
+        //         tooltipBehavior: _tooltipBehavior,
+        //       ),
+        //       const Padding(padding: EdgeInsets.all(5)),
+        //       const Text(
+        //         "Program Studi",
+        //         style: TextStyle(
+        //           fontSize: 20,
+        //           fontWeight: FontWeight.bold,
+        //         ),
+        //       ),
+        //       const Padding(padding: EdgeInsets.all(5)),
+        //       ...data["prodi"].map((prodi) {
+        //         return Padding(
+        //           padding: const EdgeInsets.all(2.0),
+        //           child: InkWell(
+        //               splashColor: Colors.blue.withAlpha(30),
+        //               onTap: () {
+        //                 Navigator.push(
+        //                   context,
+        //                   // bring state to detail prodi
+        //                   // hardcode route
+        //                   MaterialPageRoute(
+        //                       builder: (context) => DetailProdi(prodi["slug"])),
+        //                 );
+        //               },
+        //               child: Card(
+        //                 child: ListTile(
+        //                   title: Text(prodi["name"]),
+        //                   subtitle: Text(prodi["jenjang"]),
+        //                   trailing: Text("Akreditasi : ${prodi["akreditasi"]}"),
+        //                 ),
+        //               )),
+        //         );
+        //       }).toList(),
+        //     ],
+        //   ),
+        // )
+      )),
     );
   }
 
