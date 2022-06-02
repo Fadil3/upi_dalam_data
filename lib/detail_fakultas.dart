@@ -5,8 +5,8 @@ import 'package:upi_dalam_data/detail_prodi.dart';
 var informationTextStyle = const TextStyle(fontFamily: 'Oxygen');
 
 class DetailFakultas extends StatefulWidget {
-  final String fakultas;
-  const DetailFakultas(this.fakultas, {Key? key}) : super(key: key);
+  final String slug;
+  const DetailFakultas(this.slug, {Key? key,}) : super(key: key);
 
   @override
   State<DetailFakultas> createState() => _DetailFakultasState();
@@ -132,7 +132,7 @@ class _DetailFakultasState extends State<DetailFakultas> {
   @override
   Widget build(BuildContext context) {
     Map data = infoFakultas
-        .firstWhere((fakultas) => fakultas["name"] == widget.fakultas);
+        .firstWhere((fakultas) => fakultas["name"] == widget.slug);
     return Scaffold(
       body: SingleChildScrollView(
           child: Center(
