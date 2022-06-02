@@ -164,8 +164,8 @@ class _DetailFakultasState extends State<DetailFakultas> {
 
   @override
   Widget build(BuildContext context) {
-    Map data = infoFakultas.firstWhere(
-        (fakultas) => fakultas["name"] == widget.slug.toUpperCase());
+    Map data =
+        infoFakultas.firstWhere((fakultas) => fakultas["name"] == "FPMIPA");
     return Scaffold(
       body: SingleChildScrollView(
           child: Center(
