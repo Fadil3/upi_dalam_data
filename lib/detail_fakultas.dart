@@ -1,11 +1,45 @@
 import "package:flutter/material.dart";
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:upi_dalam_data/detail_prodi.dart';
 
 var informationTextStyle = const TextStyle(fontFamily: 'Oxygen');
 
+class IsiDataFakultas {
+  String slug;
+  String name;
+  String url_image;
+  IsiDataFakultas(
+      {required this.name, required this.slug, required this.url_image});
+}
+
+class DataFakultas {
+  List<IsiDataFakultas> ListPop = <IsiDataFakultas>[];
+
+  DataFakultas(Map<String, dynamic> json) {
+    // isi listPop disini
+    var data = json["data"]["fakultas"];
+    // print(data);
+    for (var val in data) {
+      var slug = val["slug"];
+      var name = val["name"];
+      var url_image = val["url_image"];
+      ListPop.add(
+          IsiDataFakultas(slug: slug, name: name, url_image: url_image));
+      // print(val);
+    }
+  }
+  //map dari json ke atribut
+  factory DataFakultas.fromJson(Map<String, dynamic> json) {
+    return DataFakultas(json);
+  }
+}
+
 class DetailFakultas extends StatefulWidget {
-  final String fakultas;
-  const DetailFakultas(this.fakultas, {Key? key}) : super(key: key);
+  final String slug;
+  const DetailFakultas(
+    this.slug, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<DetailFakultas> createState() => _DetailFakultasState();
@@ -130,8 +164,8 @@ class _DetailFakultasState extends State<DetailFakultas> {
 
   @override
   Widget build(BuildContext context) {
-    Map data = infoFakultas
-        .firstWhere((fakultas) => fakultas["name"] == widget.fakultas);
+    Map data =
+        infoFakultas.firstWhere((fakultas) => fakultas["name"] == "FPMIPA");
     return Scaffold(
       body: SingleChildScrollView(
           child: Center(
@@ -304,13 +338,24 @@ class _DetailFakultasState extends State<DetailFakultas> {
             ...data["prodi"].map((prodi) {
               return Padding(
                 padding: const EdgeInsets.all(2.0),
-                child: Card(
-                  child: ListTile(
-                    title: Text(prodi["name"]),
-                    subtitle: Text(prodi["jenjang"]),
-                    trailing: Text("Akreditasi : ${prodi["akreditasi"]}"),
-                  ),
-                ),
+                child: InkWell(
+                    splashColor: Colors.blue.withAlpha(30),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        // bring state to detail prodi
+                        // hardcode route
+                        MaterialPageRoute(
+                            builder: (context) => DetailProdi(prodi["slug"])),
+                      );
+                    },
+                    child: Card(
+                      child: ListTile(
+                        title: Text(prodi["name"]),
+                        subtitle: Text(prodi["jenjang"]),
+                        trailing: Text("Akreditasi : ${prodi["akreditasi"]}"),
+                      ),
+                    )),
               );
             }).toList(),
           ],
