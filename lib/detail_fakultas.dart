@@ -1,36 +1,70 @@
 import "package:flutter/material.dart";
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:upi_dalam_data/detail_prodi.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 var informationTextStyle = const TextStyle(fontFamily: 'Oxygen');
+
+class IsiDataProdi {
+  late String name;
+  late String jenjang;
+  late String akreditasi;
+  late String urlImage;
+  late String slug;
+
+  IsiDataProdi({
+    required this.slug,
+    required this.name,
+    required this.urlImage,
+    required this.akreditasi,
+    required this.jenjang,
+  });
+}
 
 class IsiDataFakultas {
   String slug;
   String name;
-  String url_image;
-  IsiDataFakultas(
-      {required this.name, required this.slug, required this.url_image});
-}
+  String urlImage;
+  String ratio;
+  String avgStudyTime;
+  List<IsiDataProdi> listProdi = <IsiDataProdi>[];
 
-class DataFakultas {
-  List<IsiDataFakultas> ListPop = <IsiDataFakultas>[];
+  IsiDataFakultas({
+    required this.name,
+    required this.slug,
+    required this.urlImage,
+    required this.ratio,
+    required this.avgStudyTime,
+    required this.listProdi,
+  });
 
-  DataFakultas(Map<String, dynamic> json) {
-    // isi listPop disini
-    var data = json["data"]["fakultas"];
-    // print(data);
-    for (var val in data) {
+  factory IsiDataFakultas.fromJson(Map<String, dynamic> json) {
+    var prodi = json["data"]["prodi"];
+    List<IsiDataProdi> listProdi = <IsiDataProdi>[];
+    for (var val in prodi) {
       var slug = val["slug"];
       var name = val["name"];
-      var url_image = val["url_image"];
-      ListPop.add(
-          IsiDataFakultas(slug: slug, name: name, url_image: url_image));
-      // print(val);
+      var urlImage = val["url_image"];
+      var akreditasi = val["akreditasi"];
+      var jenjang = val["jenjang"];
+
+      listProdi.add(IsiDataProdi(
+          slug: slug,
+          name: name,
+          urlImage: urlImage,
+          akreditasi: akreditasi,
+          jenjang: jenjang));
     }
-  }
-  //map dari json ke atribut
-  factory DataFakultas.fromJson(Map<String, dynamic> json) {
-    return DataFakultas(json);
+
+    return IsiDataFakultas(
+      slug: json["data"]["slug"],
+      name: json["data"]["name"],
+      urlImage: json["data"]["url_image"],
+      ratio: json["data"]["ratio"],
+      avgStudyTime: json["data"]["avg_study_time"],
+      listProdi: listProdi,
+    );
   }
 }
 
@@ -46,6 +80,25 @@ class DetailFakultas extends StatefulWidget {
 }
 
 class _DetailFakultasState extends State<DetailFakultas> {
+  late Future<IsiDataFakultas> futureIsiDataFakultas;
+  late String slug = widget.slug;
+
+  //fetch data
+  Future<IsiDataFakultas> fetchData() async {
+    String url = "http://165.22.109.98:9999/fakultas/$slug";
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      // jika server mengembalikan 200 OK (berhasil),
+      // parse json
+      return IsiDataFakultas.fromJson(jsonDecode(response.body));
+    } else {
+      // jika gagal (bukan  200 OK),
+      // lempar exception
+      throw Exception('Gagal load');
+    }
+  }
+
   List<Map> infoFakultas = [
     {
       "name": "FPMIPA",
@@ -160,6 +213,7 @@ class _DetailFakultasState extends State<DetailFakultas> {
       _ChartGender("2022", 40, 60),
     ];
     super.initState();
+    futureIsiDataFakultas = fetchData();
   }
 
   @override
@@ -214,41 +268,48 @@ class _DetailFakultasState extends State<DetailFakultas> {
             ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      const Icon(Icons.align_horizontal_left_outlined),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        "Rasio ${data["ratio"]}",
-                        style: informationTextStyle,
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      const Icon(Icons.timelapse_outlined),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        "${data["avg_study_time"]} tahun masa studi",
-                        style: informationTextStyle,
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      const Icon(Icons.home_work_sharp),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        "${data["prodi"].length.toString()} Prodi",
-                        style: informationTextStyle,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              child: FutureBuilder<IsiDataFakultas>(
+                  future: futureIsiDataFakultas,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              const Icon(Icons.align_horizontal_left_outlined),
+                              const SizedBox(height: 8.0),
+                              Text(
+                                "Rasio ${snapshot.data!.ratio}",
+                                style: informationTextStyle,
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              const Icon(Icons.timelapse_outlined),
+                              const SizedBox(height: 8.0),
+                              Text(
+                                "${snapshot.data!.avgStudyTime} tahun masa studi",
+                                style: informationTextStyle,
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              const Icon(Icons.home_work_sharp),
+                              const SizedBox(height: 8.0),
+                              Text(
+                                "${data["prodi"].length.toString()} Prodi",
+                                style: informationTextStyle,
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    }
+                    return CircularProgressIndicator();
+                  }),
             ),
             const Padding(padding: EdgeInsets.all(5)),
             SizedBox(
@@ -335,29 +396,40 @@ class _DetailFakultasState extends State<DetailFakultas> {
               ),
             ),
             const Padding(padding: EdgeInsets.all(5)),
-            ...data["prodi"].map((prodi) {
-              return Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: InkWell(
-                    splashColor: Colors.blue.withAlpha(30),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        // bring state to detail prodi
-                        // hardcode route
-                        MaterialPageRoute(
-                            builder: (context) => DetailProdi(prodi["slug"])),
-                      );
-                    },
-                    child: Card(
-                      child: ListTile(
-                        title: Text(prodi["name"]),
-                        subtitle: Text(prodi["jenjang"]),
-                        trailing: Text("Akreditasi : ${prodi["akreditasi"]}"),
-                      ),
-                    )),
-              );
-            }).toList(),
+            FutureBuilder<IsiDataFakultas>(
+                future: futureIsiDataFakultas,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      children: snapshot.data!.listProdi.map<Widget>((prodi) {
+                        return Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: InkWell(
+                              splashColor: Colors.blue.withAlpha(30),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  // bring state to detail prodi
+                                  // hardcode route
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          DetailProdi(prodi.slug)),
+                                );
+                              },
+                              child: Card(
+                                child: ListTile(
+                                  title: Text(prodi.name),
+                                  subtitle: Text(prodi.jenjang),
+                                  trailing:
+                                      Text("Akreditasi : ${prodi.akreditasi}"),
+                                ),
+                              ),
+                            ));
+                      }).toList(),
+                    );
+                  }
+                  return CircularProgressIndicator();
+                }),
           ],
         ),
       ))),
