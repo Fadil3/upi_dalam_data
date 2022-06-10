@@ -25,10 +25,12 @@ class IsiDataProdi {
 class IsiDataFakultas {
   String slug;
   String name;
+  String fullName;
   String urlImage;
   String ratio;
   String avgStudyTime;
   List<IsiDataProdi> listProdi = <IsiDataProdi>[];
+  var gallery = [];
 
   IsiDataFakultas({
     required this.name,
@@ -37,6 +39,8 @@ class IsiDataFakultas {
     required this.ratio,
     required this.avgStudyTime,
     required this.listProdi,
+    required this.fullName,
+    required this.gallery,
   });
 
   factory IsiDataFakultas.fromJson(Map<String, dynamic> json) {
@@ -58,13 +62,14 @@ class IsiDataFakultas {
     }
 
     return IsiDataFakultas(
-      slug: json["data"]["slug"],
-      name: json["data"]["name"],
-      urlImage: json["data"]["url_image"],
-      ratio: json["data"]["ratio"],
-      avgStudyTime: json["data"]["avg_study_time"],
-      listProdi: listProdi,
-    );
+        slug: json["data"]["slug"],
+        name: json["data"]["name"],
+        urlImage: json["data"]["url_image"],
+        ratio: json["data"]["ratio"],
+        avgStudyTime: json["data"]["avg_study_time"],
+        fullName: json["data"]["full_name"],
+        listProdi: listProdi,
+        gallery: json["data"]["gallery"]);
   }
 }
 
@@ -234,7 +239,7 @@ class _DetailFakultasState extends State<DetailFakultas> {
                             children: <Widget>[
                               Stack(
                                 children: <Widget>[
-                                  Image.asset(data["url_image"]),
+                                  Image.network(snapshot.data!.urlImage),
                                   SafeArea(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -263,7 +268,7 @@ class _DetailFakultasState extends State<DetailFakultas> {
                               Container(
                                 margin: const EdgeInsets.only(top: 16.0),
                                 child: Text(
-                                  data["full_name"],
+                                  snapshot.data!.fullName,
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 20.0,
@@ -317,12 +322,13 @@ class _DetailFakultasState extends State<DetailFakultas> {
                                 height: 100,
                                 child: ListView(
                                   scrollDirection: Axis.horizontal,
-                                  children: data["gallery"].map<Widget>((url) {
+                                  children:
+                                      snapshot.data!.gallery.map<Widget>((url) {
                                     return Padding(
                                       padding: const EdgeInsets.all(4.0),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
-                                        child: Image.asset(url),
+                                        child: Image.network(url),
                                       ),
                                     );
                                   }).toList(),
@@ -444,10 +450,7 @@ class _DetailFakultasState extends State<DetailFakultas> {
                           return Text("${snapshot.error}");
                         }
                         return CircularProgressIndicator();
-                      })
-
-                  // ),
-                  ))),
+                      })))),
     );
   }
 
