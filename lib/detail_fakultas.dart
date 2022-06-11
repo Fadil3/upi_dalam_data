@@ -22,6 +22,13 @@ class IsiDataProdi {
   });
 }
 
+class ChartGender {
+  late String tahun;
+  late int l;
+  late int p;
+  ChartGender({required this.tahun, required this.l, required this.p});
+}
+
 class IsiDataFakultas {
   String slug;
   String name;
@@ -30,6 +37,7 @@ class IsiDataFakultas {
   String ratio;
   String avgStudyTime;
   List<IsiDataProdi> listProdi = <IsiDataProdi>[];
+  List<ChartGender> listChartGender = <ChartGender>[];
   var gallery = [];
 
   IsiDataFakultas({
@@ -41,11 +49,13 @@ class IsiDataFakultas {
     required this.listProdi,
     required this.fullName,
     required this.gallery,
+    required this.listChartGender,
   });
 
   factory IsiDataFakultas.fromJson(Map<String, dynamic> json) {
     var prodi = json["data"]["prodi"];
     List<IsiDataProdi> listProdi = <IsiDataProdi>[];
+    List<ChartGender> listChartGender = <ChartGender>[];
     for (var val in prodi) {
       var slug = val["slug"];
       var name = val["name"];
@@ -61,6 +71,16 @@ class IsiDataFakultas {
           jenjang: jenjang));
     }
 
+    var stats = json["data"]["stats"];
+    for (var val in stats) {
+      for (var val2 in val["data"]) {
+        var tahun = val2["tahun"];
+        var l = val2["laki_laki"];
+        var p = val2["perempuan"];
+        listChartGender.add(ChartGender(tahun: tahun, l: l, p: p));
+      }
+    }
+
     return IsiDataFakultas(
         slug: json["data"]["slug"],
         name: json["data"]["name"],
@@ -69,7 +89,8 @@ class IsiDataFakultas {
         avgStudyTime: json["data"]["avg_study_time"],
         fullName: json["data"]["full_name"],
         listProdi: listProdi,
-        gallery: json["data"]["gallery"]);
+        gallery: json["data"]["gallery"],
+        listChartGender: listChartGender);
   }
 }
 
@@ -104,78 +125,10 @@ class _DetailFakultasState extends State<DetailFakultas> {
     }
   }
 
-  List<Map> infoFakultas = [
-    {
-      "name": "FPMIPA",
-      "url_image": "images/fakultas/FPMIPA.jpg",
-      "full_name": "Fakultas Pendidikan Matematika dan Ilmu Pengetahuan Alam",
-      "gallery": [
-        "images/fakultas/FPMIPA.jpg",
-        "images/fakultas/FPMIPA.jpg",
-        "images/fakultas/FPMIPA.jpg",
-        "images/fakultas/FPMIPA.jpg",
-        "images/fakultas/FPMIPA.jpg",
-        "images/fakultas/FPMIPA.jpg",
-      ],
-      "ratio": "1:30",
-      "avg_study_time": "3.5",
-      "prodi": [
-        {
-          "name": "Pendidikan Matematika",
-          "jenjang": "S1",
-          "akreditasi": "A",
-          "url_image": "images/fakultas/FPMIPA.jpg",
-          "slug": "s1-pendidikan-matematika",
-        },
-        {
-          "name": "Pendidikan Biologi",
-          "jenjang": "S1",
-          "akreditasi": "A",
-          "url_image": "images/fakultas/FPMIPA.jpg",
-          "slug": "s1-pendidikan-biologi",
-        },
-        {
-          "name": "Pendidikan Kimia",
-          "jenjang": "S1",
-          "akreditasi": "A",
-          "url_image": "images/fakultas/FPMIPA.jpg",
-          "slug": "s1-pendidikan-kimia",
-        },
-        {
-          "name": "Pendidikan Fisika",
-          "jenjang": "S1",
-          "akreditasi": "A",
-          "url_image": "images/fakultas/FPMIPA.jpg",
-          "slug": "s1-pendidikan-fisika",
-        },
-        {
-          "name": "Pendidikan Ilmu Komputer",
-          "jenjang": "S1",
-          "akreditasi": "A",
-          "url_image": "images/fakultas/FPMIPA.jpg",
-          "slug": "s1-pendidikan-ilmu-komputer",
-        },
-        {
-          "name": "International Program on Science Education",
-          "jenjang": "S1",
-          "akreditasi": "A",
-          "url_image": "images/fakultas/FPMIPA.jpg",
-          "slug": "s1-international-program-on-science-education",
-        }
-      ]
-    },
-    {"name": "FIP", "url_image": "images/fakultas/FIP.png"},
-    {"name": "FPIPS", "url_image": "images/fakultas/FPIPS.jpg"},
-    {"name": "FPBS", "url_image": "images/fakultas/FPBS.jpg"},
-    {"name": "FPSD", "url_image": "images/fakultas/FPSD.jpg"},
-    {"name": "FPTK", "url_image": "images/fakultas/FPTK.jpg"},
-    {"name": "FPOK", "url_image": "images/fakultas/FPOK.jpg"},
-    {"name": "FPEB", "url_image": "images/fakultas/FPEB.jpeg"},
-  ];
   List<_ChartKeketatan>? chartKeketatan;
   List<_ChartJabatanFungsional>? chartJabatanFungsional;
   List<_ChartPendidikan>? chartPendidikan;
-  List<_ChartGender>? chartGender;
+  List<ChartGender>? chartGender;
 
   TooltipBehavior? _tooltipBehavior;
 
@@ -213,18 +166,12 @@ class _DetailFakultasState extends State<DetailFakultas> {
       _ChartPendidikan("2021", 53, 47),
       _ChartPendidikan("2022", 41, 59),
     ];
-    chartGender = <_ChartGender>[
-      _ChartGender("2021", 38, 62),
-      _ChartGender("2022", 40, 60),
-    ];
     super.initState();
     futureIsiDataFakultas = fetchData();
   }
 
   @override
   Widget build(BuildContext context) {
-    Map data =
-        infoFakultas.firstWhere((fakultas) => fakultas["name"] == "FPMIPA");
     return Scaffold(
       body: SingleChildScrollView(
           child: Center(
@@ -309,7 +256,7 @@ class _DetailFakultasState extends State<DetailFakultas> {
                                         const Icon(Icons.home_work_sharp),
                                         const SizedBox(height: 8.0),
                                         Text(
-                                          "${data["prodi"].length.toString()} Prodi",
+                                          "${snapshot.data!.listProdi.length.toString()} Prodi",
                                           style: informationTextStyle,
                                         ),
                                       ],
@@ -404,7 +351,26 @@ class _DetailFakultasState extends State<DetailFakultas> {
                                   majorGridLines:
                                       const MajorGridLines(width: 0),
                                 ),
-                                series: _getStackedColumnSeriesGender(),
+                                series: <
+                                    StackedColumn100Series<ChartGender,
+                                        String>>[
+                                  StackedColumn100Series<ChartGender, String>(
+                                      dataSource:
+                                          snapshot.data!.listChartGender,
+                                      xValueMapper: (ChartGender data, _) =>
+                                          data.tahun,
+                                      yValueMapper: (ChartGender data, _) =>
+                                          data.l,
+                                      name: 'Laki-Laki'),
+                                  StackedColumn100Series<ChartGender, String>(
+                                      dataSource:
+                                          snapshot.data!.listChartGender,
+                                      xValueMapper: (ChartGender data, _) =>
+                                          data.tahun,
+                                      yValueMapper: (ChartGender data, _) =>
+                                          data.p,
+                                      name: 'Perempuan'),
+                                ],
                                 tooltipBehavior: _tooltipBehavior,
                               ),
                               const Padding(padding: EdgeInsets.all(5)),
@@ -530,22 +496,6 @@ class _DetailFakultasState extends State<DetailFakultas> {
           name: 'S3'),
     ];
   }
-
-  List<StackedColumn100Series<_ChartGender, String>>
-      _getStackedColumnSeriesGender() {
-    return <StackedColumn100Series<_ChartGender, String>>[
-      StackedColumn100Series<_ChartGender, String>(
-          dataSource: chartGender!,
-          xValueMapper: (_ChartGender data, _) => data.tahun,
-          yValueMapper: (_ChartGender data, _) => data.l,
-          name: 'Laki-Laki'),
-      StackedColumn100Series<_ChartGender, String>(
-          dataSource: chartGender!,
-          xValueMapper: (_ChartGender data, _) => data.tahun,
-          yValueMapper: (_ChartGender data, _) => data.p,
-          name: 'Perempuan'),
-    ];
-  }
 }
 
 class _ChartJabatanFungsional {
@@ -572,11 +522,4 @@ class _ChartPendidikan {
   final String tahun;
   final int s2;
   final int s3;
-}
-
-class _ChartGender {
-  _ChartGender(this.tahun, this.l, this.p);
-  final String tahun;
-  final int l;
-  final int p;
 }
