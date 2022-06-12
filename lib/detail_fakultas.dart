@@ -29,6 +29,13 @@ class ChartGender {
   ChartGender({required this.tahun, required this.l, required this.p});
 }
 
+class ChartPendidikan {
+  late String tahun;
+  late int s2;
+  late int s3;
+  ChartPendidikan({required this.tahun, required this.s2, required this.s3});
+}
+
 class IsiDataFakultas {
   String slug;
   String name;
@@ -38,6 +45,7 @@ class IsiDataFakultas {
   String avgStudyTime;
   List<IsiDataProdi> listProdi = <IsiDataProdi>[];
   List<ChartGender> listChartGender = <ChartGender>[];
+  List<ChartPendidikan> listChartPendidikan = <ChartPendidikan>[];
   var gallery = [];
 
   IsiDataFakultas({
@@ -50,12 +58,14 @@ class IsiDataFakultas {
     required this.fullName,
     required this.gallery,
     required this.listChartGender,
+    required this.listChartPendidikan,
   });
 
   factory IsiDataFakultas.fromJson(Map<String, dynamic> json) {
     var prodi = json["data"]["prodi"];
     List<IsiDataProdi> listProdi = <IsiDataProdi>[];
     List<ChartGender> listChartGender = <ChartGender>[];
+    List<ChartPendidikan> listChartPendidikan = <ChartPendidikan>[];
     for (var val in prodi) {
       var slug = val["slug"];
       var name = val["name"];
@@ -74,10 +84,19 @@ class IsiDataFakultas {
     var stats = json["data"]["stats"];
     for (var val in stats) {
       for (var val2 in val["data"]) {
-        var tahun = val2["tahun"];
-        var l = val2["laki_laki"];
-        var p = val2["perempuan"];
-        listChartGender.add(ChartGender(tahun: tahun, l: l, p: p));
+        var title = val["title"];
+        if (title.contains("Gender")) {
+          var tahun = val2["tahun"];
+          var l = val2["laki_laki"];
+          var p = val2["perempuan"];
+          listChartGender.add(ChartGender(tahun: tahun, l: l, p: p));
+        } else if (title.contains("Pendidikan")) {
+          var tahun = val2["tahun"];
+          var s2 = val2["s2"];
+          var s3 = val2["s3"];
+          listChartPendidikan
+              .add(ChartPendidikan(tahun: tahun, s2: s2, s3: s3));
+        }
       }
     }
 
@@ -90,7 +109,8 @@ class IsiDataFakultas {
         fullName: json["data"]["full_name"],
         listProdi: listProdi,
         gallery: json["data"]["gallery"],
-        listChartGender: listChartGender);
+        listChartGender: listChartGender,
+        listChartPendidikan: listChartPendidikan);
   }
 }
 
@@ -127,8 +147,6 @@ class _DetailFakultasState extends State<DetailFakultas> {
 
   List<_ChartKeketatan>? chartKeketatan;
   List<_ChartJabatanFungsional>? chartJabatanFungsional;
-  List<_ChartPendidikan>? chartPendidikan;
-  List<ChartGender>? chartGender;
 
   TooltipBehavior? _tooltipBehavior;
 
@@ -162,10 +180,7 @@ class _DetailFakultasState extends State<DetailFakultas> {
       _ChartKeketatan(2021, 20, 12, 8),
       _ChartKeketatan(2022, 18, 10, 4),
     ];
-    chartPendidikan = <_ChartPendidikan>[
-      _ChartPendidikan("2021", 53, 47),
-      _ChartPendidikan("2022", 41, 59),
-    ];
+
     super.initState();
     futureIsiDataFakultas = fetchData();
   }
@@ -337,7 +352,28 @@ class _DetailFakultasState extends State<DetailFakultas> {
                                   majorGridLines:
                                       const MajorGridLines(width: 0),
                                 ),
-                                series: _getStackedColumnSeriesPendidikan(),
+                                series: <
+                                    StackedColumn100Series<ChartPendidikan,
+                                        String>>[
+                                  StackedColumn100Series<ChartPendidikan,
+                                          String>(
+                                      dataSource:
+                                          snapshot.data!.listChartPendidikan,
+                                      xValueMapper: (ChartPendidikan data, _) =>
+                                          data.tahun,
+                                      yValueMapper: (ChartPendidikan data, _) =>
+                                          data.s2,
+                                      name: 'S2'),
+                                  StackedColumn100Series<ChartPendidikan,
+                                          String>(
+                                      dataSource:
+                                          snapshot.data!.listChartPendidikan,
+                                      xValueMapper: (ChartPendidikan data, _) =>
+                                          data.tahun,
+                                      yValueMapper: (ChartPendidikan data, _) =>
+                                          data.s3,
+                                      name: 'S3'),
+                                ],
                                 tooltipBehavior: _tooltipBehavior,
                               ),
                               SfCartesianChart(
@@ -480,22 +516,6 @@ class _DetailFakultasState extends State<DetailFakultas> {
           name: 'Guru Besar')
     ];
   }
-
-  List<StackedColumn100Series<_ChartPendidikan, String>>
-      _getStackedColumnSeriesPendidikan() {
-    return <StackedColumn100Series<_ChartPendidikan, String>>[
-      StackedColumn100Series<_ChartPendidikan, String>(
-          dataSource: chartPendidikan!,
-          xValueMapper: (_ChartPendidikan data, _) => data.tahun,
-          yValueMapper: (_ChartPendidikan data, _) => data.s2,
-          name: 'S2'),
-      StackedColumn100Series<_ChartPendidikan, String>(
-          dataSource: chartPendidikan!,
-          xValueMapper: (_ChartPendidikan data, _) => data.tahun,
-          yValueMapper: (_ChartPendidikan data, _) => data.s3,
-          name: 'S3'),
-    ];
-  }
 }
 
 class _ChartJabatanFungsional {
@@ -515,11 +535,4 @@ class _ChartKeketatan {
   final double y;
   final double y2;
   final double y3;
-}
-
-class _ChartPendidikan {
-  _ChartPendidikan(this.tahun, this.s2, this.s3);
-  final String tahun;
-  final int s2;
-  final int s3;
 }
