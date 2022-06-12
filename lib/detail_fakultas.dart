@@ -36,6 +36,18 @@ class ChartPendidikan {
   ChartPendidikan({required this.tahun, required this.s2, required this.s3});
 }
 
+class ChartKeketatan {
+  late double tahun;
+  late double snmptn;
+  late double sbmptn;
+  late double smupi;
+  ChartKeketatan(
+      {required this.tahun,
+      required this.snmptn,
+      required this.sbmptn,
+      required this.smupi});
+}
+
 class IsiDataFakultas {
   String slug;
   String name;
@@ -46,6 +58,7 @@ class IsiDataFakultas {
   List<IsiDataProdi> listProdi = <IsiDataProdi>[];
   List<ChartGender> listChartGender = <ChartGender>[];
   List<ChartPendidikan> listChartPendidikan = <ChartPendidikan>[];
+  List<ChartKeketatan> listChartKeketatan = <ChartKeketatan>[];
   var gallery = [];
 
   IsiDataFakultas({
@@ -59,6 +72,7 @@ class IsiDataFakultas {
     required this.gallery,
     required this.listChartGender,
     required this.listChartPendidikan,
+    required this.listChartKeketatan,
   });
 
   factory IsiDataFakultas.fromJson(Map<String, dynamic> json) {
@@ -66,6 +80,7 @@ class IsiDataFakultas {
     List<IsiDataProdi> listProdi = <IsiDataProdi>[];
     List<ChartGender> listChartGender = <ChartGender>[];
     List<ChartPendidikan> listChartPendidikan = <ChartPendidikan>[];
+    List<ChartKeketatan> listChartKeketatan = <ChartKeketatan>[];
     for (var val in prodi) {
       var slug = val["slug"];
       var name = val["name"];
@@ -96,6 +111,13 @@ class IsiDataFakultas {
           var s3 = val2["s3"];
           listChartPendidikan
               .add(ChartPendidikan(tahun: tahun, s2: s2, s3: s3));
+        } else if (title.contains("Keketatan")) {
+          var tahun = val2["tahun"];
+          var snmptn = val2["snmptn"];
+          var sbmptn = val2["sbmptn"];
+          var smupi = val2["smupi"];
+          listChartKeketatan.add(ChartKeketatan(
+              tahun: tahun, snmptn: snmptn, sbmptn: sbmptn, smupi: smupi));
         }
       }
     }
@@ -110,7 +132,8 @@ class IsiDataFakultas {
         listProdi: listProdi,
         gallery: json["data"]["gallery"],
         listChartGender: listChartGender,
-        listChartPendidikan: listChartPendidikan);
+        listChartPendidikan: listChartPendidikan,
+        listChartKeketatan: listChartKeketatan);
   }
 }
 
@@ -145,7 +168,6 @@ class _DetailFakultasState extends State<DetailFakultas> {
     }
   }
 
-  List<_ChartKeketatan>? chartKeketatan;
   List<_ChartJabatanFungsional>? chartJabatanFungsional;
 
   TooltipBehavior? _tooltipBehavior;
@@ -171,14 +193,6 @@ class _DetailFakultasState extends State<DetailFakultas> {
         21,
         10,
       ),
-    ];
-    chartKeketatan = <_ChartKeketatan>[
-      _ChartKeketatan(2017, 18, 17, 7),
-      _ChartKeketatan(2018, 29, 29, 11),
-      _ChartKeketatan(2019, 18, 17, 7),
-      _ChartKeketatan(2020, 18, 11, 7),
-      _ChartKeketatan(2021, 20, 12, 8),
-      _ChartKeketatan(2022, 18, 10, 4),
     ];
 
     super.initState();
@@ -322,7 +336,44 @@ class _DetailFakultasState extends State<DetailFakultas> {
                                     axisLine: const AxisLine(width: 0),
                                     majorTickLines: const MajorTickLines(
                                         color: Colors.transparent)),
-                                series: _getDefaultLineSeries(),
+                                series: <LineSeries<ChartKeketatan, num>>[
+                                  LineSeries<ChartKeketatan, num>(
+                                      animationDuration: 2500,
+                                      dataSource:
+                                          snapshot.data!.listChartKeketatan,
+                                      xValueMapper: (ChartKeketatan data, _) =>
+                                          data.tahun,
+                                      yValueMapper: (ChartKeketatan data, _) =>
+                                          data.snmptn,
+                                      width: 2,
+                                      name: 'SNMPTN',
+                                      markerSettings: const MarkerSettings(
+                                          isVisible: true)),
+                                  LineSeries<ChartKeketatan, num>(
+                                      animationDuration: 2500,
+                                      dataSource:
+                                          snapshot.data!.listChartKeketatan,
+                                      width: 2,
+                                      name: 'SBMPTN',
+                                      xValueMapper: (ChartKeketatan data, _) =>
+                                          data.tahun,
+                                      yValueMapper: (ChartKeketatan data, _) =>
+                                          data.sbmptn,
+                                      markerSettings: const MarkerSettings(
+                                          isVisible: true)),
+                                  LineSeries<ChartKeketatan, num>(
+                                      animationDuration: 2500,
+                                      dataSource:
+                                          snapshot.data!.listChartKeketatan,
+                                      width: 2,
+                                      name: 'SMUPI',
+                                      xValueMapper: (ChartKeketatan data, _) =>
+                                          data.tahun,
+                                      yValueMapper: (ChartKeketatan data, _) =>
+                                          data.smupi,
+                                      markerSettings:
+                                          const MarkerSettings(isVisible: true))
+                                ],
                                 tooltipBehavior: TooltipBehavior(enable: true),
                               ),
                               SfCartesianChart(
@@ -456,36 +507,6 @@ class _DetailFakultasState extends State<DetailFakultas> {
     );
   }
 
-  /// The method returns line series to chart.
-  List<LineSeries<_ChartKeketatan, num>> _getDefaultLineSeries() {
-    return <LineSeries<_ChartKeketatan, num>>[
-      LineSeries<_ChartKeketatan, num>(
-          animationDuration: 2500,
-          dataSource: chartKeketatan!,
-          xValueMapper: (_ChartKeketatan data, _) => data.x,
-          yValueMapper: (_ChartKeketatan data, _) => data.y,
-          width: 2,
-          name: 'SNMPTN',
-          markerSettings: const MarkerSettings(isVisible: true)),
-      LineSeries<_ChartKeketatan, num>(
-          animationDuration: 2500,
-          dataSource: chartKeketatan!,
-          width: 2,
-          name: 'SBMPTN',
-          xValueMapper: (_ChartKeketatan data, _) => data.x,
-          yValueMapper: (_ChartKeketatan data, _) => data.y2,
-          markerSettings: const MarkerSettings(isVisible: true)),
-      LineSeries<_ChartKeketatan, num>(
-          animationDuration: 2500,
-          dataSource: chartKeketatan!,
-          width: 2,
-          name: 'SMUPI',
-          xValueMapper: (_ChartKeketatan data, _) => data.x,
-          yValueMapper: (_ChartKeketatan data, _) => data.y3,
-          markerSettings: const MarkerSettings(isVisible: true))
-    ];
-  }
-
   List<StackedColumn100Series<_ChartJabatanFungsional, String>>
       _getStackedColumnSeries() {
     return <StackedColumn100Series<_ChartJabatanFungsional, String>>[
@@ -527,12 +548,4 @@ class _ChartJabatanFungsional {
   final double lk;
   final double lkp;
   final double gb;
-}
-
-class _ChartKeketatan {
-  _ChartKeketatan(this.x, this.y, this.y2, this.y3);
-  final double x;
-  final double y;
-  final double y2;
-  final double y3;
 }
