@@ -48,6 +48,22 @@ class ChartKeketatan {
       required this.smupi});
 }
 
+class ChartJabatanFungsional {
+  late String tahun;
+  late double tp;
+  late double aa;
+  late double lk;
+  late double lkp;
+  late double gb;
+  ChartJabatanFungsional(
+      {required this.tahun,
+      required this.tp,
+      required this.aa,
+      required this.lk,
+      required this.lkp,
+      required this.gb});
+}
+
 class IsiDataFakultas {
   String slug;
   String name;
@@ -59,6 +75,8 @@ class IsiDataFakultas {
   List<ChartGender> listChartGender = <ChartGender>[];
   List<ChartPendidikan> listChartPendidikan = <ChartPendidikan>[];
   List<ChartKeketatan> listChartKeketatan = <ChartKeketatan>[];
+  List<ChartJabatanFungsional> listChartJabatanFungsional =
+      <ChartJabatanFungsional>[];
   var gallery = [];
 
   IsiDataFakultas({
@@ -73,6 +91,7 @@ class IsiDataFakultas {
     required this.listChartGender,
     required this.listChartPendidikan,
     required this.listChartKeketatan,
+    required this.listChartJabatanFungsional,
   });
 
   factory IsiDataFakultas.fromJson(Map<String, dynamic> json) {
@@ -81,6 +100,8 @@ class IsiDataFakultas {
     List<ChartGender> listChartGender = <ChartGender>[];
     List<ChartPendidikan> listChartPendidikan = <ChartPendidikan>[];
     List<ChartKeketatan> listChartKeketatan = <ChartKeketatan>[];
+    List<ChartJabatanFungsional> listChartJabatanFungsional =
+        <ChartJabatanFungsional>[];
     for (var val in prodi) {
       var slug = val["slug"];
       var name = val["name"];
@@ -118,6 +139,15 @@ class IsiDataFakultas {
           var smupi = val2["smupi"];
           listChartKeketatan.add(ChartKeketatan(
               tahun: tahun, snmptn: snmptn, sbmptn: sbmptn, smupi: smupi));
+        } else if (title.contains("Fungsional")) {
+          var tahun = val2["tahun"];
+          var tp = val2["tp"];
+          var aa = val2["aa"];
+          var lk = val2["lk"];
+          var lkp = val2["lkp"];
+          var gb = val2["gb"];
+          listChartJabatanFungsional.add(ChartJabatanFungsional(
+              tahun: tahun, tp: tp, aa: aa, lk: lk, lkp: lkp, gb: gb));
         }
       }
     }
@@ -133,7 +163,8 @@ class IsiDataFakultas {
         gallery: json["data"]["gallery"],
         listChartGender: listChartGender,
         listChartPendidikan: listChartPendidikan,
-        listChartKeketatan: listChartKeketatan);
+        listChartKeketatan: listChartKeketatan,
+        listChartJabatanFungsional: listChartJabatanFungsional);
   }
 }
 
@@ -168,33 +199,12 @@ class _DetailFakultasState extends State<DetailFakultas> {
     }
   }
 
-  List<_ChartJabatanFungsional>? chartJabatanFungsional;
-
   TooltipBehavior? _tooltipBehavior;
 
   @override
   void initState() {
     _tooltipBehavior =
         TooltipBehavior(enable: true, header: '', canShowMarker: false);
-    chartJabatanFungsional = <_ChartJabatanFungsional>[
-      _ChartJabatanFungsional(
-        '2020',
-        4,
-        8,
-        12,
-        22,
-        5,
-      ),
-      _ChartJabatanFungsional(
-        '2021',
-        2,
-        20,
-        9,
-        21,
-        10,
-      ),
-    ];
-
     super.initState();
     futureIsiDataFakultas = fetchData();
   }
@@ -388,7 +398,65 @@ class _DetailFakultasState extends State<DetailFakultas> {
                                   majorGridLines:
                                       const MajorGridLines(width: 0),
                                 ),
-                                series: _getStackedColumnSeries(),
+                                series: <
+                                    StackedColumn100Series<
+                                        ChartJabatanFungsional, String>>[
+                                  StackedColumn100Series<ChartJabatanFungsional,
+                                          String>(
+                                      dataSource: snapshot
+                                          .data!.listChartJabatanFungsional,
+                                      xValueMapper:
+                                          (ChartJabatanFungsional data, _) =>
+                                              data.tahun,
+                                      yValueMapper:
+                                          (ChartJabatanFungsional data, _) =>
+                                              data.tp,
+                                      name: 'Tenaga Pengajar'),
+                                  StackedColumn100Series<ChartJabatanFungsional,
+                                          String>(
+                                      dataSource: snapshot
+                                          .data!.listChartJabatanFungsional,
+                                      xValueMapper:
+                                          (ChartJabatanFungsional data, _) =>
+                                              data.tahun,
+                                      yValueMapper:
+                                          (ChartJabatanFungsional data, _) =>
+                                              data.aa,
+                                      name: 'Asisten Ahli'),
+                                  StackedColumn100Series<ChartJabatanFungsional,
+                                          String>(
+                                      dataSource: snapshot
+                                          .data!.listChartJabatanFungsional,
+                                      xValueMapper:
+                                          (ChartJabatanFungsional data, _) =>
+                                              data.tahun,
+                                      yValueMapper:
+                                          (ChartJabatanFungsional data, _) =>
+                                              data.lk,
+                                      name: 'Lektor'),
+                                  StackedColumn100Series<ChartJabatanFungsional,
+                                          String>(
+                                      dataSource: snapshot
+                                          .data!.listChartJabatanFungsional,
+                                      xValueMapper:
+                                          (ChartJabatanFungsional data, _) =>
+                                              data.tahun,
+                                      yValueMapper:
+                                          (ChartJabatanFungsional data, _) =>
+                                              data.lkp,
+                                      name: 'Lektor Kepala'),
+                                  StackedColumn100Series<ChartJabatanFungsional,
+                                          String>(
+                                      dataSource: snapshot
+                                          .data!.listChartJabatanFungsional,
+                                      xValueMapper:
+                                          (ChartJabatanFungsional data, _) =>
+                                              data.tahun,
+                                      yValueMapper:
+                                          (ChartJabatanFungsional data, _) =>
+                                              data.gb,
+                                      name: 'Guru Besar')
+                                ],
                                 tooltipBehavior: _tooltipBehavior,
                               ),
                               SfCartesianChart(
@@ -506,46 +574,4 @@ class _DetailFakultasState extends State<DetailFakultas> {
                       })))),
     );
   }
-
-  List<StackedColumn100Series<_ChartJabatanFungsional, String>>
-      _getStackedColumnSeries() {
-    return <StackedColumn100Series<_ChartJabatanFungsional, String>>[
-      StackedColumn100Series<_ChartJabatanFungsional, String>(
-          dataSource: chartJabatanFungsional!,
-          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
-          yValueMapper: (_ChartJabatanFungsional data, _) => data.tp,
-          name: 'Tenaga Pengajar'),
-      StackedColumn100Series<_ChartJabatanFungsional, String>(
-          dataSource: chartJabatanFungsional!,
-          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
-          yValueMapper: (_ChartJabatanFungsional data, _) => data.aa,
-          name: 'Asisten Ahli'),
-      StackedColumn100Series<_ChartJabatanFungsional, String>(
-          dataSource: chartJabatanFungsional!,
-          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
-          yValueMapper: (_ChartJabatanFungsional data, _) => data.lk,
-          name: 'Lektor'),
-      StackedColumn100Series<_ChartJabatanFungsional, String>(
-          dataSource: chartJabatanFungsional!,
-          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
-          yValueMapper: (_ChartJabatanFungsional data, _) => data.lkp,
-          name: 'Lektor Kepala'),
-      StackedColumn100Series<_ChartJabatanFungsional, String>(
-          dataSource: chartJabatanFungsional!,
-          xValueMapper: (_ChartJabatanFungsional data, _) => data.tahun,
-          yValueMapper: (_ChartJabatanFungsional data, _) => data.gb,
-          name: 'Guru Besar')
-    ];
-  }
-}
-
-class _ChartJabatanFungsional {
-  _ChartJabatanFungsional(
-      this.tahun, this.tp, this.aa, this.lk, this.lkp, this.gb);
-  final String tahun;
-  final double tp;
-  final double aa;
-  final double lk;
-  final double lkp;
-  final double gb;
 }
