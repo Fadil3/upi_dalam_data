@@ -19,6 +19,7 @@ class DataDosen {
     var data = json["data"]["dosen"];
     // print(data);
     for (var val in data) {
+      print(val);
       var nama = val["nama"];
       var jabatan = val["jabatan"];
       var golongan = val["golongan"];
@@ -196,6 +197,7 @@ class CariDosenState extends State<CariDosen> {
                       return Center(
                         //gunakan listview builder
                         child: ListView.builder(
+                          shrinkWrap: true,
                           itemCount: snapshot
                               .data!.ListPop.length, //asumsikan data ada isi
                           itemBuilder: (context, index) {
@@ -205,13 +207,11 @@ class CariDosenState extends State<CariDosen> {
                                 child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(snapshot.data!.ListPop[index].nama
-                                          .toString()),
-                                      Text(snapshot.data!.ListPop[index].jabatan
-                                          .toString()),
+                                      Text(snapshot.data!.ListPop[index].nama),
                                       Text(snapshot
-                                          .data!.ListPop[index].golongan
-                                          .toString()),
+                                          .data!.ListPop[index].jabatan),
+                                      Text(snapshot
+                                          .data!.ListPop[index].golongan),
                                     ]));
                           },
                         ),
