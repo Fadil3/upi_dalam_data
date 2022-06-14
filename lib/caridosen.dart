@@ -205,14 +205,30 @@ class CariDosenState extends State<CariDosen> {
                                 decoration: BoxDecoration(border: Border.all()),
                                 padding: const EdgeInsets.all(14),
                                 child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(snapshot.data!.ListPop[index].nama),
-                                      Text(snapshot
-                                          .data!.ListPop[index].jabatan),
-                                      Text(snapshot
-                                          .data!.ListPop[index].golongan),
-                                    ]));
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(snapshot.data!.ListPop[index].nama),
+                                    Text(snapshot.data!.ListPop[index].jabatan),
+                                    Text(
+                                        snapshot.data!.ListPop[index].golongan),
+                                    Padding(
+                                      padding: EdgeInsets.all(
+                                          10), //20 pixel ke semua arah
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailDosen()),
+                                          );
+                                          ; //refresh
+                                        },
+                                        child: const Text('Detail Dosen'),
+                                      ),
+                                    ),
+                                  ],
+                                ));
                           },
                         ),
                       );
