@@ -47,7 +47,7 @@ class DetailDosenState extends State<DetailDosen> {
                   Padding(
                     padding: EdgeInsets.only(top: 8),
                     child: Text(
-                      'Fadlurahman M.T',
+                      'Prof. Turmudi, M.Ed., M.Sc., Ph.D.',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
