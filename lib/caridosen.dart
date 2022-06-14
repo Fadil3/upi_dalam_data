@@ -173,7 +173,107 @@ class CariDosenState extends State<CariDosen> {
                                 ),
                               ], rows: [
                                 DataRow(cells: [
-                                  DataCell(Text('Fadlurahman MT')),
+                                  DataCell(Text(
+                                      'Prof. Turmudi, M.Ed., M.Sc., Ph.D.')),
+                                  DataCell(Text('Guru Besar')),
+                                  DataCell(Text('IV/d')),
+                                  DataCell(TextButton(
+                                      onPressed: () {
+                                        // route to detail dosen
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailDosen()),
+                                        );
+                                      },
+                                      child: const Text('Lihat')))
+                                ]),
+                                DataRow(cells: [
+                                  DataCell(Text('Suprih Widodo, S.Si., M.T.')),
+                                  DataCell(Text('Lektor')),
+                                  DataCell(Text('III/c')),
+                                  DataCell(TextButton(
+                                      onPressed: () {
+                                        // route to detail dosen
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailDosen()),
+                                        );
+                                      },
+                                      child: const Text('Lihat')))
+                                ]),
+                                DataRow(cells: [
+                                  DataCell(Text('Dr. Suci Utami Putri, M.Pd.')),
+                                  DataCell(Text('Lektor')),
+                                  DataCell(Text('III/c')),
+                                  DataCell(TextButton(
+                                      onPressed: () {
+                                        // route to detail dosen
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailDosen()),
+                                        );
+                                      },
+                                      child: const Text('Lihat')))
+                                ]),
+                                DataRow(cells: [
+                                  DataCell(
+                                      Text('Dr. Hafiziani Eka Putri, M.Pd.')),
+                                  DataCell(Text('Lektor')),
+                                  DataCell(Text('III/d')),
+                                  DataCell(TextButton(
+                                      onPressed: () {
+                                        // route to detail dosen
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailDosen()),
+                                        );
+                                      },
+                                      child: const Text('Lihat')))
+                                ]),
+                                DataRow(cells: [
+                                  DataCell(Text('Ahmad Fauzi, S.Si., M.T.')),
+                                  DataCell(Text('Tenaga Pengajar')),
+                                  DataCell(Text('III/b')),
+                                  DataCell(TextButton(
+                                      onPressed: () {
+                                        // route to detail dosen
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailDosen()),
+                                        );
+                                      },
+                                      child: const Text('Lihat')))
+                                ]),
+                                DataRow(cells: [
+                                  DataCell(
+                                      Text('Dr. Idat Muqodas, S.Pd., M.Pd.')),
+                                  DataCell(Text('Asisten Ahli')),
+                                  DataCell(Text('III/b')),
+                                  DataCell(TextButton(
+                                      onPressed: () {
+                                        // route to detail dosen
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailDosen()),
+                                        );
+                                      },
+                                      child: const Text('Lihat')))
+                                ]),
+                                DataRow(cells: [
+                                  DataCell(Text(
+                                      'Prof. Dr. H. Sofyan Iskandar, M.Pd.')),
                                   DataCell(Text('Guru Besar')),
                                   DataCell(Text('IV/d')),
                                   DataCell(TextButton(
