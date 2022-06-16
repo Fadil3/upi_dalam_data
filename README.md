@@ -29,7 +29,7 @@ Endpoint :
 ```
 * Get detail fakultas
 
-  status: **In progress**
+  status: **Done**
   
   file: **detail_fakultas.dart**
   
@@ -37,6 +37,32 @@ Endpoint :
   {
     method: 'GET',
     path: '/fakultas/{slug}',
+  },
+ ```
+ 
+ * Get detail prodi
+ 
+   status: **Done**
+   
+   file: **detail_prodi.dart**
+  
+```
+  {
+    method: 'GET',
+    path: '/prodi/{slug}',
+  },
+ ```
+ 
+ * Get all dosen
+ 
+   status: **Done**
+   
+   file: **dosen.dart**
+  
+```
+  {
+    method: 'GET',
+    path: '/dosen',
   },
  ```
  
