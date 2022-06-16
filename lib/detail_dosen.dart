@@ -38,8 +38,8 @@ class DetailDosenState extends State<DetailDosen> {
                 height: 115,
                 width: 115,
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "http://berita.upi.edu/wp-content/uploads/2018/08/Prof.-Turmudi1-1024x953.jpg"),
+                  backgroundImage: ExactAssetImage(
+                      "images/Prof_Turmudi1.jpg"),
                 ),
               ),
               Column(
