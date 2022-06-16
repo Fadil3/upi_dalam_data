@@ -122,7 +122,7 @@ class _DosenState extends State<Dosen> {
                                         padding: const EdgeInsets.all(10.0),
                                         child: Column(children: const [
                                           Text(
-                                            "24",
+                                            "35",
                                             style: TextStyle(
                                                 fontSize: 20,
                                                 color: Colors.red,
@@ -135,7 +135,7 @@ class _DosenState extends State<Dosen> {
                                         padding: const EdgeInsets.all(10.0),
                                         child: Column(children: const [
                                           Text(
-                                            "24",
+                                            "44",
                                             style: TextStyle(
                                                 fontSize: 20,
                                                 color: Colors.red,
@@ -148,7 +148,7 @@ class _DosenState extends State<Dosen> {
                                         padding: const EdgeInsets.all(10.0),
                                         child: Column(children: const [
                                           Text(
-                                            "24",
+                                            "38",
                                             style: TextStyle(
                                                 fontSize: 20,
                                                 color: Colors.red,
@@ -161,7 +161,7 @@ class _DosenState extends State<Dosen> {
                                         padding: const EdgeInsets.all(10.0),
                                         child: Column(children: const [
                                           Text(
-                                            "24",
+                                            "18",
                                             style: TextStyle(
                                                 fontSize: 20,
                                                 color: Colors.red,
