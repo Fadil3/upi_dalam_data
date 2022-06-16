@@ -1,5 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:upi_dalam_data/detail_dosen.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+class IsiDataDosen {
+  String nama;
+  String jabatan;
+  String golongan;
+  IsiDataDosen(
+      {required this.nama, required this.jabatan, required this.golongan});
+}
+
+class DataDosen {
+  List<IsiDataDosen> ListPop = <IsiDataDosen>[];
+
+  DataDosen(Map<String, dynamic> json) {
+    // isi listPop disini
+    var data = json["data"]["dosen"];
+    // print(data);
+    for (var val in data) {
+      print(val);
+      var nama = val["nama"];
+      var jabatan = val["jabatan"];
+      var golongan = val["golongan"];
+      ListPop.add(
+          IsiDataDosen(nama: nama, jabatan: jabatan, golongan: golongan));
+      // print(val);
+    }
+  }
+  //map dari json ke atribut
+  factory DataDosen.fromJson(Map<String, dynamic> json) {
+    return DataDosen(json);
+  }
+}
 
 void main() {
   runApp(const CariDosen());
@@ -14,6 +47,25 @@ class CariDosen extends StatefulWidget {
 }
 
 class CariDosenState extends State<CariDosen> {
+  late Future<DataDosen> futureDataDosen;
+
+  String url = "http://165.22.109.98:9999/dosen";
+
+  //fetch data
+  Future<DataDosen> fetchData() async {
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      // jika server mengembalikan 200 OK (berhasil),
+      // parse json
+      return DataDosen.fromJson(jsonDecode(response.body));
+    } else {
+      // jika gagal (bukan  200 OK),
+      // lempar exception
+      throw Exception('Gagal load');
+    }
+  }
+
   final textEditController = TextEditingController();
   String _nama = "";
   String pilihanSalam = "DAA";
@@ -26,6 +78,12 @@ class CariDosenState extends State<CariDosen> {
           child: Text(cell),
         );
       }).toList());
+
+  @override
+  void initState() {
+    super.initState();
+    futureDataDosen = fetchData();
+  }
 
   @override
   void dispose() {
@@ -128,176 +186,58 @@ class CariDosenState extends State<CariDosen> {
             ),
           ],
         ),
-        Container(
-          child: Column(children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  SizedBox(
-                      width: 480,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Card(
-                                child: Column(children: [
-                              const Padding(
-                                padding:
-                                    EdgeInsets.all(10), //20 pixel ke semua arah
-                              ),
-                              const Text(
-                                'Daftar Dosen',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                              const Padding(
-                                padding:
-                                    EdgeInsets.all(10), //20 pixel ke semua arah
-                              ),
-                              DataTable(columns: const [
-                                DataColumn(
-                                  label: Text('Nama'),
-                                ),
-                                DataColumn(
-                                  label: Text('Jabatan'),
-                                ),
-                                DataColumn(
-                                  label: Text('Golongan'),
-                                ),
-                                DataColumn(
-                                  label: Text(''),
-                                ),
-                              ], rows: [
-                                DataRow(cells: [
-                                  DataCell(Text(
-                                      'Prof. Turmudi, M.Ed., M.Sc., Ph.D.')),
-                                  DataCell(Text('Guru Besar')),
-                                  DataCell(Text('IV/d')),
-                                  DataCell(TextButton(
-                                      onPressed: () {
-                                        // route to detail dosen
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailDosen()),
-                                        );
-                                      },
-                                      child: const Text('Lihat')))
-                                ]),
-                                DataRow(cells: [
-                                  DataCell(Text('Suprih Widodo, S.Si., M.T.')),
-                                  DataCell(Text('Lektor')),
-                                  DataCell(Text('III/c')),
-                                  DataCell(TextButton(
-                                      onPressed: () {
-                                        // route to detail dosen
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailDosen()),
-                                        );
-                                      },
-                                      child: const Text('Lihat')))
-                                ]),
-                                DataRow(cells: [
-                                  DataCell(Text('Dr. Suci Utami Putri, M.Pd.')),
-                                  DataCell(Text('Lektor')),
-                                  DataCell(Text('III/c')),
-                                  DataCell(TextButton(
-                                      onPressed: () {
-                                        // route to detail dosen
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailDosen()),
-                                        );
-                                      },
-                                      child: const Text('Lihat')))
-                                ]),
-                                DataRow(cells: [
-                                  DataCell(
-                                      Text('Dr. Hafiziani Eka Putri, M.Pd.')),
-                                  DataCell(Text('Lektor')),
-                                  DataCell(Text('III/d')),
-                                  DataCell(TextButton(
-                                      onPressed: () {
-                                        // route to detail dosen
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailDosen()),
-                                        );
-                                      },
-                                      child: const Text('Lihat')))
-                                ]),
-                                DataRow(cells: [
-                                  DataCell(Text('Ahmad Fauzi, S.Si., M.T.')),
-                                  DataCell(Text('Tenaga Pengajar')),
-                                  DataCell(Text('III/b')),
-                                  DataCell(TextButton(
-                                      onPressed: () {
-                                        // route to detail dosen
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailDosen()),
-                                        );
-                                      },
-                                      child: const Text('Lihat')))
-                                ]),
-                                DataRow(cells: [
-                                  DataCell(
-                                      Text('Dr. Idat Muqodas, S.Pd., M.Pd.')),
-                                  DataCell(Text('Asisten Ahli')),
-                                  DataCell(Text('III/b')),
-                                  DataCell(TextButton(
-                                      onPressed: () {
-                                        // route to detail dosen
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailDosen()),
-                                        );
-                                      },
-                                      child: const Text('Lihat')))
-                                ]),
-                                DataRow(cells: [
-                                  DataCell(Text(
-                                      'Prof. Dr. H. Sofyan Iskandar, M.Pd.')),
-                                  DataCell(Text('Guru Besar')),
-                                  DataCell(Text('IV/d')),
-                                  DataCell(TextButton(
-                                      onPressed: () {
-                                        // route to detail dosen
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailDosen()),
-                                        );
-                                      },
-                                      child: const Text('Lihat')))
-                                ]),
-                              ])
-                            ])),
-                          ),
-                        ],
-                      )),
-                ])
-              ],
-            )
-          ]),
-        )
+        const Padding(padding: EdgeInsets.all(10)),
+        Center(
+            child: SizedBox(
+                width: 480,
+                child: FutureBuilder<DataDosen>(
+                  future: futureDataDosen,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Center(
+                        //gunakan listview builder
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: snapshot
+                              .data!.ListPop.length, //asumsikan data ada isi
+                          itemBuilder: (context, index) {
+                            return Container(
+                                decoration: BoxDecoration(border: Border.all()),
+                                padding: const EdgeInsets.all(14),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(snapshot.data!.ListPop[index].nama),
+                                    Text(snapshot.data!.ListPop[index].jabatan),
+                                    Text(
+                                        snapshot.data!.ListPop[index].golongan),
+                                    Padding(
+                                      padding: EdgeInsets.all(
+                                          10), //20 pixel ke semua arah
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DetailDosen()),
+                                          );
+                                          ; //refresh
+                                        },
+                                        child: const Text('Detail Dosen'),
+                                      ),
+                                    ),
+                                  ],
+                                ));
+                          },
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    }
+                    return CircularProgressIndicator();
+                  },
+                )))
       ]), //column center
     );
   }
