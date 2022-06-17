@@ -116,28 +116,35 @@ class _MahasiswaUKTState extends State<MahasiswaUKT> {
                                       DataCell(Text('FPMIPA')),
                                       DataCell(Text('Ilmu Komputer')),
                                       DataCell(Text('6')),
-                                      DataCell(Text('123456')),
+                                      DataCell(Text('1900303')),
                                       DataCell(Text('2.000.000')),
                                     ]),
                                     DataRow(cells: [
                                       DataCell(Text('FPMIPA')),
                                       DataCell(Text('Ilmu Komputer')),
                                       DataCell(Text('6')),
-                                      DataCell(Text('123456')),
-                                      DataCell(Text('2.000.000')),
+                                      DataCell(Text('1900618')),
+                                      DataCell(Text('3.000.000')),
                                     ]),
                                     DataRow(cells: [
                                       DataCell(Text('FPMIPA')),
                                       DataCell(Text('Ilmu Komputer')),
                                       DataCell(Text('6')),
-                                      DataCell(Text('123456')),
-                                      DataCell(Text('2.000.000')),
+                                      DataCell(Text('1903907')),
+                                      DataCell(Text('4.000.000')),
                                     ]),
                                     DataRow(cells: [
                                       DataCell(Text('FPMIPA')),
                                       DataCell(Text('Ilmu Komputer')),
                                       DataCell(Text('6')),
-                                      DataCell(Text('123456')),
+                                      DataCell(Text('1907998')),
+                                      DataCell(Text('1.000.000')),
+                                    ]),
+                                    DataRow(cells: [
+                                      DataCell(Text('FPMIPA')),
+                                      DataCell(Text('Ilmu Komputer')),
+                                      DataCell(Text('6')),
+                                      DataCell(Text('1900141')),
                                       DataCell(Text('2.000.000')),
                                     ]),
                                   ])
@@ -145,27 +152,6 @@ class _MahasiswaUKTState extends State<MahasiswaUKT> {
                               ],
                             )),
                         const Padding(padding: EdgeInsets.all(10)),
-                        SizedBox(
-                          width: 300,
-                          height: 35,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: Wrap(
-                              children: const <Widget>[
-                                Icon(
-                                  Icons.download,
-                                  color: Colors.white,
-                                  size: 20.0,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text("Download as CSV",
-                                    style: TextStyle(fontSize: 16)),
-                              ],
-                            ),
-                          ),
-                        ),
                         const Padding(padding: EdgeInsets.all(8.0)),
                       ])
                 ],

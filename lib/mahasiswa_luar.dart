@@ -115,29 +115,36 @@ class _MahasiswaLuarState extends State<MahasiswaLuar> {
                                     DataRow(cells: [
                                       DataCell(Text('FPMIPA')),
                                       DataCell(Text('Ilmu Komputer')),
-                                      DataCell(Text('123456')),
+                                      DataCell(Text('1900303')),
                                       DataCell(Text('Bimantoro')),
                                       DataCell(Text('Bangkit')),
                                     ]),
                                     DataRow(cells: [
                                       DataCell(Text('FPMIPA')),
                                       DataCell(Text('Ilmu Komputer')),
-                                      DataCell(Text('123456')),
-                                      DataCell(Text('Bimantoro')),
+                                      DataCell(Text('1900618')),
+                                      DataCell(Text('Diffa')),
                                       DataCell(Text('Bangkit')),
                                     ]),
                                     DataRow(cells: [
                                       DataCell(Text('FPMIPA')),
                                       DataCell(Text('Ilmu Komputer')),
-                                      DataCell(Text('123456')),
-                                      DataCell(Text('Bimantoro')),
+                                      DataCell(Text('1903907')),
+                                      DataCell(Text('Fadhlirahman')),
                                       DataCell(Text('Bangkit')),
                                     ]),
                                     DataRow(cells: [
                                       DataCell(Text('FPMIPA')),
                                       DataCell(Text('Ilmu Komputer')),
-                                      DataCell(Text('123456')),
-                                      DataCell(Text('Bimantoro')),
+                                      DataCell(Text('1900141')),
+                                      DataCell(Text('Dennis')),
+                                      DataCell(Text('Bangkit')),
+                                    ]),
+                                    DataRow(cells: [
+                                      DataCell(Text('FPMIPA')),
+                                      DataCell(Text('Ilmu Komputer')),
+                                      DataCell(Text('1907998')),
+                                      DataCell(Text('Rayhan')),
                                       DataCell(Text('Bangkit')),
                                     ]),
                                   ])
@@ -145,27 +152,6 @@ class _MahasiswaLuarState extends State<MahasiswaLuar> {
                               ],
                             )),
                         const Padding(padding: EdgeInsets.all(10)),
-                        SizedBox(
-                          width: 300,
-                          height: 35,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: Wrap(
-                              children: const <Widget>[
-                                Icon(
-                                  Icons.download,
-                                  color: Colors.white,
-                                  size: 20.0,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text("Download as CSV",
-                                    style: TextStyle(fontSize: 16)),
-                              ],
-                            ),
-                          ),
-                        ),
                         const Padding(padding: EdgeInsets.all(8.0)),
                       ])
                 ],
