@@ -38,8 +38,8 @@ class DetailDosenState extends State<DetailDosen> {
                 height: 115,
                 width: 115,
                 child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2022/01/21/992560672.png"),
+                  backgroundImage: ExactAssetImage(
+                      "images/Prof_Turmudi1.jpg"),
                 ),
               ),
               Column(
@@ -47,7 +47,7 @@ class DetailDosenState extends State<DetailDosen> {
                   Padding(
                     padding: EdgeInsets.only(top: 8),
                     child: Text(
-                      'Fadlurahman M.T',
+                      'Prof. Turmudi, M.Ed., M.Sc., Ph.D.',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
