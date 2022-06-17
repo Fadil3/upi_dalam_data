@@ -54,26 +54,6 @@ class _MahasiswaRataState extends State<MahasiswaRata> {
               ),
             ),
             const Padding(padding: EdgeInsets.all(10)),
-            SizedBox(
-              width: 300,
-              height: 35,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Wrap(
-                  children: const <Widget>[
-                    Icon(
-                      Icons.download,
-                      color: Colors.white,
-                      size: 20.0,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text("Download as CSV", style: TextStyle(fontSize: 16)),
-                  ],
-                ),
-              ),
-            ),
           ],
         ),
       )),
